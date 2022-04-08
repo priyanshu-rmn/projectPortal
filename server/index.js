@@ -2,8 +2,6 @@ const express = require('express')
 const app = express()
 const path = require('path');
 
-//passport js for google oauth
-const passport = require('passport')
 const port = 8000
 
 
@@ -13,39 +11,41 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 
+//mongoose for mongo db
+const mongoose = require('mongoose');
+//mongoDB connection
+async function connectDB() {
+    await mongoose.connect('mongodb://0.0.0.0:27017/projectPortal');
+}
+connectDB().
+    then(() => {
+        console.log("Connection Opened");
+    }).
+    catch(e => {
+        console.log('Error', e);
+    });
+    
+    const db = require('./models/db');
+    
+
 //routes
-app.get('/login', (req, res) => {
-    res.render('login');
-})
+const router = require('./routes/sRoutes');
+const firstTime = require('./routes/first-time');
+const sRoutes = require('./routes/sRoutes')
+const pRoutes = require('./routes/pRoutes')
+const aRoutes = require('./routes/aRoutes')
+// use the s.js file to handle endpoints starting with /s 
 app.get('/', (req, res) => {
-    res.render('home');
+    res.send("<h1>HOME</h1><ul> ROUTES ARE : <li>/login</li> <li>/profile-reg</li> <li>/s/:roll-number/dashboard/</li> <li>/s/:roll-number/profile/</li> <li>/p/:proff-id/dashboard </li> <li>/p/:proff-id/selected-students</li> <li>/a/dashboard  </li> <li>/a/faculties</li></ul>")
 })
-app.get('/success', (req, res) => {
-    res.send("logged in ");
-})
-app.get('/failed', (req, res) => {
-    res.send("failed");
-})
-// app.get('/failed', (req, res) => {
-//     res.send('Failed');
-// })
-// app.get('/good', (req, res) => {
-    //     res.send('Logged In');
-    // })
-
-// //passport js copied
-// app.get('/auth/google',
-//     passport.authenticate('google', { scope: ['profile', 'username'] }));
-
-// app.get('/auth/google/callback',
-//     passport.authenticate('google', { failureRedirect: '/failed' }),
-//     function (req, res) {
-//         // Successful authentication, redirect home.
-//         res.redirect('/');
-//     });
+app.use('/', firstTime);
+app.use('/s', sRoutes);
+app.use('/p', pRoutes);
+app.use('/a', aRoutes);
 
 
-
+//passport js for google oauth
+const passport = require('passport')
 
 
 
