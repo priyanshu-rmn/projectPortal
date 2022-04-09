@@ -5,6 +5,8 @@ const studentSchema = mongoose.Schema({
     mname: String,
     lname: String,
     contact: Number,
+    googleId: String,
+    secret: String,
     resumeLink : String,
     email: {
         type: String,
@@ -35,7 +37,9 @@ const proffSchema = mongoose.Schema({
     },
     fName: String,
     mName : String,
-    lName : String,
+    lName: String,
+    googleId: String,
+    secret: String,
     total: {
         type : Number,
         default: 10,
