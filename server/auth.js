@@ -1,40 +1,9 @@
 require("dotenv").config();
-// const express = require('express')
-// const app = express()
 const mongoose = require('mongoose');
-
-// const session = require("express-session");
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-
-const passportLocalMongoose = require("passport-local-mongoose");
-const findOrCreate = require("mongoose-findorcreate");
-
-
-
-// app.use(session({
-//     secret: "Our little secret.",
-//     resave: false,
-//     saveUninitialized: false
-// }));
-// app.use(passport.initialize());
-// app.use(passport.session());
-
-
-
-const userSchema = new mongoose.Schema({
-    username: String,
-    name: String,
-    googleId: String,
-    secret: String,
-    email: String,
-    profileURL : String,
-});
-
-userSchema.plugin(passportLocalMongoose);
-userSchema.plugin(findOrCreate);
-
-const User = new mongoose.model("User", userSchema);
+const db = require('./models/db');
+const User = db.User;
 
 passport.use(User.createStrategy());
 
@@ -46,9 +15,6 @@ passport.use(new GoogleStrategy({
 
   },
     function (accessToken, refreshToken, profile, cb) {
-        console.log("--------------------------------------------")
-        // console.dir(profile);
-        console.log("--------------------------------------------")
         User.findOrCreate({
             username: profile._json.name,
             googleId: profile._json.sub, 
@@ -68,3 +34,6 @@ passport.serializeUser(function(user, done) {
       done(err, user);
     });
   });
+
+
+  

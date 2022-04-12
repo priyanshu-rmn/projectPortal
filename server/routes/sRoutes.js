@@ -1,17 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const sControllers = require('../controller/sControllers');
+const controllers = require('../controller/sControllers');
 
 // /s/20074026/dashboard
 router
-    .route("/:roll/dashboard")
-    .get(sControllers.dashboardData)
+    .route("/:rollNo/dashboard")
+    .get(controllers.GETdashboard)
+    // .get((req, res) => {
+    //     const { rollNo } = req.params;
+    //     res.send(`GET /s/${rollNo}/dashboard`)
+    // })
 
 
 router
     .route("/:roll/profile")
-    .get(sControllers.GETprofileData)
-    .post(sControllers.POSTprofileData)
+    .get(controllers.GETprofileData)
+    .post(controllers.POSTprofileData)
 
 
 module.exports = router;

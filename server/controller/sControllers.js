@@ -13,17 +13,10 @@ async function getStudentDetails(roll) {
 }
 
 
-const dashboardData = async (req, res) => {
-    const { roll } = req.params;
-    // const studentData = 
-    const allProffs = await getProffList();
-    console.log(allProffs);
-    const availableProffs = [];
-    const appliedProffs = 
-
-
-
-    res.send(allProffs);   
+const GETdashboard = async (req, res) => {
+    const { rollNo } = req.params;
+    const allProffs = await 
+    res.send(`${rollNo}`);
 }
 
 const GETprofileData = async (req, res) => {
@@ -44,7 +37,7 @@ const POSTprofileData = async (req, res) => {
 
 
 const sControllers = {
-    dashboardData: dashboardData,
+    GETdashboard: GETdashboard,
     GETprofileData : GETprofileData,
     POSTprofileData : POSTprofileData,
 }
