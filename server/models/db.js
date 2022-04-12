@@ -1,18 +1,16 @@
 const mongoose = require('mongoose')
 
 const studentSchema = mongoose.Schema({
-    fname: String,
-    mname: String,
-    lname: String,
-    contact: Number,
-    googleId: String,
-    secret: String,
+    fName: String,
+    mName: String,
+    lName: String,
+    contactNo: Number,
     resumeLink : String,
     email: {
         type: String,
         required: true
     },
-    roll: { // will serve as primary key
+    rollNo: { // will serve as primary key
         type: Number,
         required: true
     },
@@ -38,8 +36,7 @@ const proffSchema = mongoose.Schema({
     fName: String,
     mName : String,
     lName: String,
-    googleId: String,
-    secret: String,
+    email : String,
     total: {
         type : Number,
         default: 10,
@@ -61,10 +58,27 @@ const proffSchema = mongoose.Schema({
 //     }
 // });
 
+const passportLocalMongoose = require("passport-local-mongoose");
+const findOrCreate = require("mongoose-findorcreate");
+
+const userSchema = new mongoose.Schema({
+    username: String,
+    name: String,
+    googleId: String,
+    secret: String,
+    email: String,
+    profileURL : String,
+});
+
+userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(findOrCreate);
+
+// const User = new mongoose.model("User", userSchema);
 
 const db = { 
     Student : mongoose.model("Student", studentSchema),
-    Proff : mongoose.model("Proff", proffSchema),
+    Proff: mongoose.model("Proff", proffSchema),
+    User : mongoose.model("User", userSchema),
     // Preference: mongoose.model("Preference", preferenceSchema),
 } 
 
