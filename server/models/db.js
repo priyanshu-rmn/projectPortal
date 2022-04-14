@@ -1,32 +1,5 @@
 const mongoose = require('mongoose')
-
-const studentSchema = mongoose.Schema({
-    fName: String,
-    mName: String,
-    lName: String,
-    contactNo: Number,
-    resumeLink : String,
-    email: {
-        type: String,
-        required: true
-    },
-    rollNo: { // will serve as primary key
-        type: Number,
-        required: true
-    },
-    selectedProff: {
-        type: String,
-        default: null
-    },
-    currentCPI: {
-        type: Number,
-        required : true
-    },
-    proffOrder: {
-        type: [String] // stroresId
-    }
-});
-
+var mongooseTypePhone = require('mongoose-type-phone');
 
 const proffSchema = mongoose.Schema({
     id: {
@@ -34,7 +7,6 @@ const proffSchema = mongoose.Schema({
         required: true
     },
     fName: String,
-    mName : String,
     lName: String,
     email : String,
     total: {
@@ -47,16 +19,47 @@ const proffSchema = mongoose.Schema({
 
 });
 
+proffSchema.virtual('fullName').get(function () {
+    return `${this.fName} ${this.lName}`;
+})
+proffSchema.virtual('left').get(function () {
+    return this.total - this.selectedStudents.length;
+})
 
-// const preferenceSchema = mongoose.Schema({
-//     roll: {
-//         type: Number,
-//         required: true
-//     },
-//     order: {
-//         type: [String] // stroresId
-//     }
-// });
+
+const studentSchema = mongoose.Schema({
+    fName: String,
+    lName: {
+        type: String,
+        default: "",
+    },
+    contactNo: Number,
+    resumeLink : String,
+    email: {
+        type: String,
+        required: true
+    },
+    rollNo: { // will serve as primary key
+        type: Number,
+        required: true
+    },
+    selectedProff: {
+        type: String,
+        default: "TO BE SELECTED",
+    },
+    currentCPI: {
+        type: Number,
+        required : true
+    },
+    proffOrder: {
+        type: [String] // stroresId
+    }
+});
+
+studentSchema.virtual('fullName').get(function () {
+    return `${this.fName} ${this.lName}`;
+})
+
 
 const passportLocalMongoose = require("passport-local-mongoose");
 const findOrCreate = require("mongoose-findorcreate");
@@ -73,13 +76,11 @@ const userSchema = new mongoose.Schema({
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
 
-// const User = new mongoose.model("User", userSchema);
 
 const db = { 
     Student : mongoose.model("Student", studentSchema),
     Proff: mongoose.model("Proff", proffSchema),
     User : mongoose.model("User", userSchema),
-    // Preference: mongoose.model("Preference", preferenceSchema),
 } 
 
 module.exports = db;
