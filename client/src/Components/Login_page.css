@@ -1,0 +1,31 @@
+.loginbg{
+    background-image: url("../images/background.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 88vh;
+    width: 100%;
+    /* filter: blur(12px); */
+}
+.logbtn{
+    margin-top: auto;
+   padding: auto;
+}
+.button{
+    text-align: center;
+    padding-top: 25%;
+}
+.logbtn{
+    background-color: antiquewhite;
+    color: black;
+    font-size: 40px;
+    width: 30%;
+    height: 25%;
+}
+.logbtn:hover::after{
+    background-color: antiquewhite;
+}
+.btn-logo{
+    height: 50px;
+    width: 60px;
+}

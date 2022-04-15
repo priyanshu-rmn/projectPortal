@@ -1,5 +1,6 @@
 .navbar-brand{
     height: 100px;
+
 }
 .logo{
     height: 75px;
@@ -15,4 +16,7 @@
     color: purple;
     padding-top: 45px;
     padding-inline-end: 0%;
+}
+.navbar navbar-expand-lg navbar-light bg-light{
+    background-color: white;
 }
