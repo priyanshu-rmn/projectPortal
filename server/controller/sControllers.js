@@ -56,6 +56,7 @@ const GETprofileData = async (req, res) => {
 const POSTprofileData = async (req, res) => {
     const { rollNo } = req.params;
     const newData = req.body;
+    //MISTAKE : SELECTED PROFF LIST WILL BE REMOVED
     const updatedDoc = await db.Student.findOneAndReplace({ rollNo: rollNo }, newData, { new: true })
     // console.log(updatedDoc);
     res.redirect(`/s/${rollNo}/dashboard`);

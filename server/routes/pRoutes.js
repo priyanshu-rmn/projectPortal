@@ -1,25 +1,17 @@
 const express = require('express');
+const { GETdashboard, POSTdashboard, GETprofileData, POSTprofileData,GETselectedStudents } = require('../controller/pControllers');
 const router = express.Router();
 
 router
-    .route("/:proffId/dashboard")
-    // /s/20074026/dashboard
-    .get((req, res) => {
-        res.send('GET /p/abcde-12345/dashboard')
-
-    })
-    .post((req, res) => {
-        res.send('POST /p/abcde-12345/dashboard')
-    })
+    .route("/:id/dashboard")
+    .get(GETdashboard)
+    .post(POSTdashboard)
 
 router
-    .route("/:roll/selectedStudents")
-    .get((req, res) => {
-        res.send('GET /p/abcde-12345/selectedStudents')
+    .route("/:id/profile")
+    .get(GETprofileData)
+    .post(POSTprofileData)
 
-    })
-    .post((req, res) => {
-        res.send('POST /p/abcde-12345/selectedStudents')
-    })
+router.get('/:id/selectedStudents', GETselectedStudents);
 
 module.exports = router;

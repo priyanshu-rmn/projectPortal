@@ -14,85 +14,100 @@ connectDB()
         console.log('Error', e);
     });
 
-const proffs = [
-    {
-        id: uuid(),
-        fName: "AKT",
-    },
-    {
-        id: uuid(),
-        fName: "Mayank",
-    },
-    {
-        id: uuid(),
-        fName: "KKS",
-    },
-    {
-        id: uuid(),
-        fName: "BB",
-    },
-    {
-        id: uuid(),
-        fName: "RSS",
-    },
-    {
-        id: uuid(),
-        fName: "Laxmanan",
-    },
-    {
-        id: uuid(),
-        fName: "Tanima",
-    },
-    {
-        id: uuid(),
-        fName: "PC",
-    },
-    {
-        id: uuid(),
-        fName: "SKS",
-    }
-]
+// const proffs = [
+//     {
+//         id: uuid(),
+//         email: "akt@itbhu.ac.in",
+//         fName: "AKT",
+//     },
+//     {
+//         id: uuid(),
+//         email: "mayank@itbhu.ac.in",
+//         fName: "Mayank",
+//     },
+//     {
+//         id: uuid(),
+//         email: "kks@itbhu.ac.in",
+//         fName: "KKS",
+//     },
+//     {
+//         id: uuid(),
+//         email: "bb@itbhu.ac.in",
+//         fName: "BB",
+//     },
+//     {
+//         id: uuid(),
+//         email: "rss@itbhu.ac.in",
+//         fName: "RSS",
+//     },
+//     {
+//         id: uuid(),
+//         email: "laxmanan@itbhu.ac.in",
+//         fName: "Laxmanan",
+//     },
+//     {
+//         id: uuid(),
+//         email: "tanima@itbhu.ac.in",
+//         fName: "Tanima",
+//     },
+//     {
+//         id: uuid(),
+//         email: "pc@itbhu.ac.in",
+//         fName: "PC",
+//     },
+//     {
+//         id: uuid(),
+//         email: "sks@itbhu.ac.in",
+//         fName: "SKS",
+//     }
+// ]
 
 
 const students = [
     {
-        fname: 'Priyanshu',
+        fName: 'Priyanshu',
         email: 'priyanshu.cse20@itbhu.ac.in',
-        roll: 20074026,
-        currentCPI: 9.76
+        rollNo: 20074026,
+        currentCPI: 9.76,
+        proffOrder : ["2ad9e24a-a0d1-4d81-ad94-af161167434b" ,"967c7cf3-6ebf-4a48-a7c0-5ad3d312412b","01e17f92-b7f1-4881-8f89-999341e22579", "e3716b50-102e-4330-b8c0-effb1be33d35", "5d6446ba-4bfe-455a-b6b7-8c392e444c14", "5bda1ad9-9cfc-43c4-9391-92a60a6e9de5"]
     },
     {
-        fname: 'Deepanshu',
+        fName: 'Deepanshu',
         email: 'deepanshu.cse20@itbhu.ac.in',
-        roll: 20075014,
-        currentCPI: 9.66
+        rollNo: 20075014,
+        currentCPI: 9.66,
+        proffOrder : ["2ad9e24a-a0d1-4d81-ad94-af161167434b" , "967c7cf3-6ebf-4a48-a7c0-5ad3d312412b","01e17f92-b7f1-4881-8f89-999341e22579", "e3716b50-102e-4330-b8c0-effb1be33d35", "5d6446ba-4bfe-455a-b6b7-8c392e444c14", "5bda1ad9-9cfc-43c4-9391-92a60a6e9de5"]
     },
     {
-        fname: 'Rahul',
+        fName: 'Rahul',
         email: 'rahul.cse20@itbhu.ac.in',
-        roll: 20075024,
-        currentCPI: 9.79
+        rollNo: 20075024,
+        currentCPI: 9.79,
+        selectedProff: "2ad9e24a-a0d1-4d81-ad94-af161167434b",
     },
     {
-        fname: 'Manvi',
+        fName: 'Manvi',
         email: 'manvi.cse20@itbhu.ac.in',
-        roll: 20075054,
-        currentCPI: 9.96
+        rollNo: 20075054,
+        currentCPI: 9.96,
+        selectedProff : "5d6446ba-4bfe-455a-b6b7-8c392e444c14",
     },
     {
-        fname: 'Shalini',
-        email: 'shalini.cse20@itbhu.ac.in',
-        roll: 20074029,
-        currentCPI: 9.56
+        fName: 'Suhani',
+        email: 'suhani.cse20@itbhu.ac.in',
+        rollNo: 20074029,
+        currentCPI: 9.56,
+        proffOrder : ["967c7cf3-6ebf-4a48-a7c0-5ad3d312412b","01e17f92-b7f1-4881-8f89-999341e22579", "e3716b50-102e-4330-b8c0-effb1be33d35", "5d6446ba-4bfe-455a-b6b7-8c392e444c14", "5bda1ad9-9cfc-43c4-9391-92a60a6e9de5"]
     }
 ]
 
-db.Proff.insertMany(proffs)
-    .then(res => console.log(res))
-    .catch(e => console.log("error", e));
+// db.Proff.insertMany(proffs)
+//     .then(res => console.log(res))
+//     .catch(e => console.log("error", e));
 
 db.Student.insertMany(students)
     .then(res => console.log(res))
     .catch(e => console.log("error", e));
 
-
+    
+    

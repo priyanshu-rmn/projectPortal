@@ -46,10 +46,10 @@ async function POSTprofileReg(req, res) {
         }
     }
     else {
-        const newProff = new db.Student({ ...data, id : uuid() });
+        const newProff = new db.Proff({ ...data, id : uuid() });
         try {
             await newProff.save();
-            res.redirect(`/p/${data.id}/dashboard`);
+            res.redirect(`/p/${newProff.id}/dashboard`);
 
         } catch (e) {
             console.log("ERROR ", e);
