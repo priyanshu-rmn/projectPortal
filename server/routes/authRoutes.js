@@ -42,9 +42,14 @@ router
                 }
             }
             else {
-                const user = await db.Proff.findOne({ email: req.user.email });
-                if(!user) res.redirect(`/p/${user.id}/dashboard`);          
-                else res.redirect('/profileReg')
+                try {
+                    const user = await db.Proff.findOne({ email: req.user.email });
+                    if(user) res.redirect(`/p/${user.id}/dashboard`);          
+                    else res.redirect('/profileReg')    
+                } catch (e) {
+                    console.log("ERROR @ line 43", e.message);
+                }
+
             }
         })
 

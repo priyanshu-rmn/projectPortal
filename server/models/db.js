@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-var mongooseTypePhone = require('mongoose-type-phone');
 
 const proffSchema = mongoose.Schema({
     id: {
@@ -8,13 +7,19 @@ const proffSchema = mongoose.Schema({
     },
     fName: String,
     lName: String,
-    email : String,
+    email: {
+        type: String,
+        required:true,
+    },
     total: {
         type : Number,
         default: 10,
     },
     selectedStudents: {
         type: [Number]
+    },
+    tempSavedStudents: {
+        type : [Number]
     }
 
 });
@@ -45,13 +50,14 @@ const studentSchema = mongoose.Schema({
     },
     selectedProff: {
         type: String,
-        default: "TO BE SELECTED",
+        default: null,
     },
     currentCPI: {
         type: Number,
         required : true
     },
     proffOrder: {
+        //FEATURE : ADD TIME SO THAT FCFS SORTING CAN BE DONE
         type: [String] // stroresId
     }
 });

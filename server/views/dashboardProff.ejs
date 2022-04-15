@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Student</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+    <nav>
+        <a href="/p/<%= proffDetails.id%>/profile">profile</a>
+        <a href="/logout"> logout</a>
+    </nav>
+    <h2>requests</h2>
+    <ul>
+        <% for(let s of requests){ %>
+            <li>
+                <pre> <%= s.fullName %>   <%= s.rollNo%> </pre>
+                <button>Add</button>
+            </li>
+            <% } %>
+    </ul>
+
+    <h2>SELECTIONS</h2>
+    <h4>selected yet : <%=proffDetails.tempSavedStudents.length %>
+    </h4>
+    <ul>
+        <% for(let s of proffDetails.tempSavedStudents){ %>
+            <li>
+                <pre> <%= s.fullName %>   <%= s.rollNo%> </pre>
+            </li>
+            <% } %>
+    </ul>
+    <button type="submit" >SAVE</button>
+
+
+
+    <script>
+    </script>
+</body>
+
+</html>
