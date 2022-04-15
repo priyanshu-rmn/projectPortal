@@ -1,6 +1,6 @@
 import React from 'react';
-import './Login_page.css';
-function Login_page(){
+import './LoginPage.css';
+function LoginPage(){
     return(
         <>
              <div className="loginbg">
@@ -15,4 +15,4 @@ function Login_page(){
 }
 
 
-export default Login_page;
+export default LoginPage;

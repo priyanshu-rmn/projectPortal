@@ -1,11 +1,11 @@
 import React from 'react';
 import NavBar from './Components/NavBar';
-import Login_page from './Components/Login_page';
+import LoginPage from './Components/LoginPage';
 function App() {
   return (
     <>
      <NavBar/>
-      <Login_page/>
+      <LoginPage/>
     </>
   );
 }
