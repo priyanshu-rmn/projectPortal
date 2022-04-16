@@ -12,7 +12,7 @@
 }
 .logbtn{
     margin-top: auto;
-   padding: auto;
+    padding: auto;
 }
 .button{
     text-align: center;
@@ -31,4 +31,56 @@
 .btn-logo{
     height: 50px;
     width: 60px;
+}
+.head{
+    text-align: center;
+}
+.Form{
+    width: 40%;
+    height: 80%;
+    background-color: white;
+    margin-left: 35%;
+}
+.ff{
+    width: 250px;
+    height: 50px;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+.ff{
+    position: relative;
+}
+.row{
+  justify-content: center;
+  margin-top: 5% ;
+}
+input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    font-size: 15px;
+}
+ label{
+    position: absolute;
+    top: 50%;
+    left: 1.4rem;
+    cursor: text;
+    transform: translateY(-50%);
+    transition: all .8s ease;
+}
+input:focus + label,
+input:valid + label{
+    top: 0;
+    background: white;
+}
+.btnProfile{
+  text-align: right;
+  margin-top: 5%;
+  margin-right: 15%;
+}
+.BPro{
+    height: 30%;
+}
+.roll{
+    text-align: left;
 }
