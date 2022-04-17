@@ -5,11 +5,12 @@ function RegForm(){
         <>
              <div className="loginbg">
                  <h1 className='pt-5 head'>Complete your Profile</h1>
-                  <div className='Form'>
-                      <div className="row pt-5">
-                          <div className="ff">
-                              <input type="text" placeholder='' required />
-                              <label   htmlFor="">First Name</label>
+                 <div className="Form">
+                     <form classNane= "Frm" method='POST' action="/profileReg">
+                         <div className="row pt-5">
+                             <div className="ff">
+                                <input type="text" placeholder='' required />
+                                <label   htmlFor="">First Name</label>
                           </div>
                           <div className="ff">
                               <input type="text" placeholder='' required />
@@ -45,7 +46,8 @@ function RegForm(){
                       <div className="btnProfile">
                            <button type="button" class="btn btn-outline-dark BPro">CONTINUE</button>
                       </div>
-                  </div>
+                     </form>
+                </div>
              </div>
         </>
     );
