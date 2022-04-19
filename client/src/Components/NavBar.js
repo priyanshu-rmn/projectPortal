@@ -12,8 +12,9 @@ function NavBar(){
      <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav">
         <h1 className='heading'> Project Portal</h1>
+        <p className='clg navbar-text'>Indian Institute of Technology (Banaras Hindu University) Varanasi</p>
       </ul>
-      <p className='clg navbar-text'>Indian Institute of Technology (Banaras Hindu University) Varanasi</p>
+      
     </div>
     
   </div>
