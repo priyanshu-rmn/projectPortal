@@ -1,0 +1,13 @@
+section{
+    height: 80vh ;
+}
+section div{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh ;
+    /* background-image: url('../images/bg-image.jpeg') ; */
+    background-repeat: no-repeat;
+    background-size: contain;
+    
+}
