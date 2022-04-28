@@ -1,12 +1,18 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import LoginPage from "./pages/LoginPage";
+import StudentDashboard from "./pages/StudentDashboard";
+import Header from "./components/layout/Header";
 
 function App() {
   return (
     <>
-      <Routes>
+      <Header/>
+      <Routes>   
         <Route exact path="/" element={<LoginPage />} />
+        <Route exact path="/dashboard" element={<StudentDashboard />} />
       </Routes>
     </>
   );
