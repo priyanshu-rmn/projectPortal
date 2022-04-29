@@ -1,0 +1,23 @@
+a {
+  text-decoration: none;
+}
+.button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+  /* border: 2px solid red; */ /* for testing*/
+  padding: 20px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.15);
+  color: black !important; /*because of some webkit preferences*/
+  background-color: white;
+  font: inherit;
+  outline: none;
+
+}
+
+.button-label{
+  font-size: 2rem;
+  margin-left: 1rem;
+}
