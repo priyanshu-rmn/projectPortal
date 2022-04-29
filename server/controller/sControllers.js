@@ -23,6 +23,7 @@ async function getStudentDetails(rollNo) {
 
 
 const GETdashboard = async (req, res) => {
+    console.log("/dashboard : ", req.user);
     const { rollNo } = req.params;
     const allProffs = await getProffList();
     const studentData = await getStudentDetails(rollNo);
@@ -47,9 +48,10 @@ const POSTdashboard = async (req, res) => {
 }
 
 const GETprofileData = async (req, res) => {
+    console.log("/profile : ",req.user);
     const { rollNo } = req.params;        
     const studentDetails = await getStudentDetails(rollNo);
-    console.log( { ...studentDetails._doc });
+    // console.log( { ...studentDetails._doc });
     res.render('profileStudent', { ...studentDetails._doc, });
 }
 

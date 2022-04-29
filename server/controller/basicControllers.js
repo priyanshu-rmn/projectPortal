@@ -14,6 +14,8 @@ function isStudent(email) {
 }
 
 function GETlogin(req, res) {
+    console.log("/login", req.user);// -->undefined
+    // console.log("session: ", req.sessionID); --->session id
     res.render('login.ejs');
 }
 
@@ -63,6 +65,8 @@ function GETprotected(req, res) {
 }
 
 function GETlogout(req, res) {
+    console.log("user", req.user);
+    console.log("session", req.sessionID);
     req.logout();
     res.redirect("/login");
 }

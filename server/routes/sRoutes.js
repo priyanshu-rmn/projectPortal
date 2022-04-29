@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controllers = require('../controller/sControllers');
 
+
 // /s/20074026/dashboard
 router
     .route("/:rollNo/dashboard")
