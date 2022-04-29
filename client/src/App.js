@@ -1,15 +1,23 @@
-import "./App.css";
-import { Route, Routes } from "react-router-dom";
+// import "./App.css";
+import { Route, Routes, Navigate } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
+import Home from "./pages/Home";
+import { useContext } from "react";
+
+import { UserContext } from "./UserContext";
+
 
 function App() {
-  return (
-    <>
-      <Routes>
-        <Route exact path="/" element={<LoginPage />} />
-      </Routes>
-    </>
-  );
+  const userObject = useContext( UserContext );
+  console.log(userObject);
+    return (
+      <>
+        <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/login" element={<LoginPage />} />
+        </Routes>
+      </>
+    );
 }
 
 export default App;
