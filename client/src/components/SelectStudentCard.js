@@ -1,6 +1,6 @@
-import "./AppliedProffCard.css"
+import "./SelectStudentCard.css"
 import { AiOutlinePlusCircle } from 'react-icons/ai';
-function AvailableProffCard(props){
+function SelectStudentCard(props){
     return (
         <div className='card in'>
             <span> {props.text} </span>    
@@ -8,4 +8,4 @@ function AvailableProffCard(props){
         </div>
     );
 }
-export default AvailableProffCard;
+export default SelectStudentCard;

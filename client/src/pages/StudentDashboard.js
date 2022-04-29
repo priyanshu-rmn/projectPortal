@@ -1,16 +1,15 @@
 import AvailableProffCard from '../components/AvailableProffCard';
 import AppliedProffCard from '../components/AppliedProffCard';
-import SideNavbar from "../components/SideNavbar";
 import "./StudentDashboard.css";
 import {useState} from 'react';
 
-let proff1 = [ "AKT", "RNC", "KKS", "BB"];
-let proff2 = ["PC", "BSDK"];
+let proff1 = [ "AKT", "RNC", "KKS", "BB"];      //proff1 - available proff
+let proff2 = ["PC", "MAS"];                     //proff2 - applied proff
 
 function StudentDashboard(){ 
     const [old , updated] = useState([]);
 
-    function addproffs(name){
+    function addProffs(name){
         console.log(`clicked ${name}`);
         let index = proff1.indexOf(name);
         proff2.push(name);
@@ -18,7 +17,7 @@ function StudentDashboard(){
         updated([proff1,proff2]);
     }
 
-    function removeproffs(name){
+    function removeProffs(name){
         console.log(`clicked ${name}`);
         let index = proff2.indexOf(name);
         proff1.push(name);
@@ -26,7 +25,7 @@ function StudentDashboard(){
         updated([proff1,proff2]);
     }
 
-    function upvoteproff(name){
+    function upvoteProff(name){
         console.log(`clicked ${name}`);
         let index = proff2.indexOf(name);
         if(index>0){
@@ -37,33 +36,31 @@ function StudentDashboard(){
         updated([proff1,proff2]);
     }
 
-    let list1=[];
+    let AvailableProffList=[];
     for(let p1 of proff1){
         console.log(`1- ${p1}`);
-        list1.push(<AvailableProffCard text={p1} func={addproffs}/>);
+        AvailableProffList.push(<AvailableProffCard text={p1} func={addProffs}/>);
     }
 
-    let list2=[];
+    let AppliedProffList=[];
     let i = 1;
     for(let p2 of proff2){
         console.log(p2);
-        list2.push(<AppliedProffCard text = {p2} slNo={i++} func={removeproffs} func2={upvoteproff}/>);
+        AppliedProffList.push(<AppliedProffCard text = {p2} slNo={i++} func={removeProffs} func2={upvoteProff}/>);
     }
 
-    console.log("list1", list1);
-    console.log("list2", list2);
+    console.log("list1", AvailableProffList);
+    console.log("list2", AppliedProffList);
     return(
     <div>
-    {console.log('POORA CHAL RHA H')}
-    <SideNavbar/>
     <div className='card-group'>
         <div className='card out' >
             <h4 >Available Proffs</h4>
-            {list1}
+            {AvailableProffList}
         </div>
         <div className='card out'>
             <h4>Applied Proffs</h4>
-            {list2}
+            {AppliedProffList}
         </div>
     </div>
     </div>

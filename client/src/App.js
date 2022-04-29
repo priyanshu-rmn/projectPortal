@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import LoginPage from "./pages/LoginPage";
 import StudentDashboard from "./pages/StudentDashboard";
+import ProffDashboard from "./pages/ProffDashboard";
 import Header from "./components/layout/Header";
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
       <Header/>
       <Routes>   
         <Route exact path="/" element={<LoginPage />} />
-        <Route exact path="/dashboard" element={<StudentDashboard />} />
+        <Route exact path="/sdashboard" element={<StudentDashboard />} />
+        <Route exact path="/pdashboard" element={<ProffDashboard />} />
       </Routes>
     </>
   );
