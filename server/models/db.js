@@ -1,10 +1,6 @@
 const mongoose = require('mongoose')
 
 const proffSchema = mongoose.Schema({
-    id: {
-        type: String,
-        required: true
-    },
     fName: String,
     lName: String,
     email: {
@@ -16,10 +12,10 @@ const proffSchema = mongoose.Schema({
         default: 10,
     },
     selectedStudents: {
-        type: [Number]
+        type: [String]
     },
     tempSavedStudents: {
-        type : [Number]
+        type : [String]
     }
 
 });
@@ -44,7 +40,7 @@ const studentSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    rollNo: { // will serve as primary key
+    rollNo: { 
         type: Number,
         required: true
     },
@@ -59,7 +55,8 @@ const studentSchema = mongoose.Schema({
     proffOrder: {
         //FEATURE : ADD TIME SO THAT FCFS SORTING CAN BE DONE
         type: [String] // stroresId
-    }
+    },
+    googleId: Number
 });
 
 studentSchema.virtual('fullName').get(function () {
@@ -73,7 +70,7 @@ const findOrCreate = require("mongoose-findorcreate");
 const userSchema = new mongoose.Schema({
     username: String,
     name: String,
-    googleId: String,
+    googleId: Number,
     secret: String,
     email: String,
     profileURL: String,
