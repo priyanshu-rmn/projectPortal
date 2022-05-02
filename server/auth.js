@@ -36,7 +36,6 @@ passport.use(
           googleId: profile._json.sub,
           email: profile._json.email,
           profileURL: profile._json.picture,
-          token: accessToken,
         },
         function (err, user) {
           return cb(err, user);

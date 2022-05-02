@@ -5,7 +5,7 @@ const passport = require("passport"); // require passport for authentication and
 require("./auth"); //load auth files
 const session = require("express-session"); // for storing logged in user info
 const mongoose = require("mongoose"); //mongoose for mongo db
-const cors = require('cors');
+const cors = require("cors");
 const port = 8000;
 //MIDDLEWARES
 
@@ -40,7 +40,7 @@ async function connectDB() {
 }
 connectDB()
   .then(() => {
-      console.log("Connection Opened");
+    console.log("Connection Opened");
   })
   .catch((e) => {
     console.log("Error", e);
@@ -52,6 +52,7 @@ const sRoutes = require("./routes/sRoutes");
 const pRoutes = require("./routes/pRoutes");
 const aRoutes = require("./routes/aRoutes");
 const authRoutes = require("./routes/authRoutes");
+// const db = require("./models/db");
 app.get("/", (req, res) => {
   res.send(
     "<h1>HOME</h1><ul> ROUTES ARE : <li>/login</li> <li>/profile-reg</li> <li>/s/:roll-number/dashboard/</li> <li>/s/:roll-number/profile/</li> <li>/p/:proff-id/dashboard </li> <li>/p/:proff-id/selected-students</li> <li>/a/dashboard  </li> <li>/a/faculties</li></ul>"
@@ -63,9 +64,11 @@ app.use("/p", pRoutes);
 app.use("/a", aRoutes);
 app.use("/auth", authRoutes);
 
-app.get("/getUser", (req, res) => {
-    res.send(req.user);
-})
+app.get("/getUser", async (req, res) => {
+  // const data = await db.Student.findById(req.user._id);
+  // res.send(...data);
+  res.send(req.user);
+});
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}...`);

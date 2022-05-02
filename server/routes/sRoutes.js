@@ -5,7 +5,7 @@ const controllers = require('../controller/sControllers');
 
 // /s/20074026/dashboard
 router
-    .route("/:rollNo/dashboard")
+    .route("/:id/dashboard")
     .get(controllers.GETdashboard)
     .post(controllers.POSTdashboard)// dynamically updates applied proff
 
@@ -16,7 +16,7 @@ router
 
 
 router
-    .route("/:rollNo/profile")
+    .route("/:id/profile")
     .get(controllers.GETprofileData)
     .post(controllers.POSTprofileData)
 

@@ -12,9 +12,9 @@ async function getProffList() {
     }
 }
 
-async function getStudentDetails(rollNo) {
+async function getStudentDetails(id) {
     try {
-        const data = await db.Student.findOne({ rollNo: rollNo });
+        const data = await db.Student.findById(id);
         return data;
     } catch (e) {
         console.log("Error", e);
@@ -24,20 +24,23 @@ async function getStudentDetails(rollNo) {
 
 const GETdashboard = async (req, res) => {
     console.log("/dashboard : ", req.user);
-    const { rollNo } = req.params;
+    const { id } = req.params;
     const allProffs = await getProffList();
-    const studentData = await getStudentDetails(rollNo);
+    const studentData = await getStudentDetails(id);
 
     const appliedProffs = studentData.proffOrder;
     const availableProffs = allProffs.filter(p => !appliedProffs.includes(p.id));
-    const reqDataAvailableProffs = availableProffs.map(p => {
-        return { id : p.id, fullName: p.fullName,left :  p.left };
-    })
-    const reqDataAppliedProffs = appliedProffs.map(p => {
-        return { id : p.id, fullName: p.fullName,left :  p.left };
-    })
-    // console.log(reqDataAvailableProffs);
-    res.render('dashboardStudent', {reqDataAvailableProffs,reqDataAppliedProffs, rollNo});
+    
+    // const reqDataAvailableProffs = availableProffs.map(p => {
+    //     return { id : p.id, fullName: p.fullName,left :  p.left };
+    // })
+    // const reqDataAppliedProffs = appliedProffs.map(p => {
+    //     return { id : p.id, fullName: p.fullName,left :  p.left };
+    // })
+    console.log("availableProffs", availableProffs);
+    console.log("appliedProffs", appliedProffs);   
+    console.log("studentData", studentData);
+    res.send({availableProffs,appliedProffs,studentData});
 }
 
 const POSTdashboard = async (req, res) => {

@@ -1,0 +1,9 @@
+function FormInput({ forNameId,type, value}){
+    return (
+        <>
+            <label htmlFor={ forNameId}>First Name</label>
+            <input type={type} name={forNameId} id={forNameId } value={value}/>
+        </>
+    );
+}
+export default FormInput;
