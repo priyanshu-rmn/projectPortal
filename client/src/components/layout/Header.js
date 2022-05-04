@@ -27,7 +27,7 @@ function Header() {
             <img src={require("../../images/logo.jpg")} alt="IIT-BHU-LOGO" />
           </div>
           <div className="text-container">
-            <div className="heading">Project Portal
+            <div className="heading">Project Portal        
           
             <BiLogOut className="logout"  onClick={logoutHandler}></BiLogOut>
           </div>

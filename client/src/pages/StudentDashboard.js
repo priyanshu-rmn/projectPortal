@@ -137,16 +137,20 @@ function StudentDashboard() {
           )}
         </div>
       </div>
+      <div className="bbutton">
       {!isLocked && (
         <>
-          <div>
-            <button onClick={saveAppliedProffHandler}>SAVE</button>
+
+          <div >
+            <button onClick={saveAppliedProffHandler }  class="btn btn-success"  >SAVE</button>
           </div>
-          <div>
-            <button onClick={lockAppliedProffHandler}>LOCK</button>
+
+          <div >
+            <button onClick={lockAppliedProffHandler} class="btn btn-danger">LOCK</button>
           </div>
         </>
       )}
+      </div>
     </>
   );
 }

@@ -21,3 +21,12 @@
     box-shadow: 1 3px 7px rgba(0,0,0,0.5);
     padding: 1rem 2rem;
   }
+
+  .bbutton>div
+  {
+  display: inline-block;
+  float: right;
+  margin-right: 5%;
+  margin-top:2%;
+  }
+
