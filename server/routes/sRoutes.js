@@ -18,11 +18,13 @@ router
     //     res.send(`GET /s/${rollNo}/dashboard`)
     // })
 
+router.post("/:id/lock", controllers.POSTlock)
 
 router
     .route("/:id/profile",isLoggedIn)
     .get(controllers.GETprofileData)
     .post(controllers.POSTprofileData)
+
 
 
 module.exports = router;
