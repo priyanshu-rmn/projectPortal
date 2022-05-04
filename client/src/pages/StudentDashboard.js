@@ -1,19 +1,22 @@
 import AvailableProffCard from "../components/AvailableProffCard";
 import AppliedProffCard from "../components/AppliedProffCard";
+import AppliedProffCardLocked from "../components/AppliedProffCardLocked ";
 import "./StudentDashboard.css";
 import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../UserContext";
 import axios from "axios";
 
 function StudentDashboard() {
-  const [studentData, setstudentData] = useState({});
-  const [state, updateState] = useState({ availableProffs: [], appliedProffs: [] })
+  const [isLocked, setIsLocked] = useState(true);
+  const [state, updateState] = useState({
+    availableProffs: [],
+    appliedProffs: [],
+  });
   let proff1 = state.availableProffs;
   let proff2 = state.appliedProffs;
-  
 
   const userObject = useContext(UserContext);
-  
+
   useEffect(() => {
     console.log(userObject);
     axios
@@ -25,8 +28,8 @@ function StudentDashboard() {
         console.log(res.data);
         proff1 = res.data.availableProffs;
         proff2 = res.data.appliedProffs;
-        
-        updateState({availableProffs:proff1, appliedProffs:proff2})
+        setIsLocked(res.data.studentData.isLocked);
+        updateState({ availableProffs: proff1, appliedProffs: proff2 });
       });
   }, [userObject]);
 
@@ -35,7 +38,7 @@ function StudentDashboard() {
     let index = proff1.indexOf(p);
     proff2.push(p);
     proff1.splice(index, 1);
-    updateState({availableProffs:proff1, appliedProffs:proff2})
+    updateState({ availableProffs: proff1, appliedProffs: proff2 });
   }
 
   function removeProffs(p) {
@@ -43,7 +46,7 @@ function StudentDashboard() {
     let index = proff2.indexOf(p);
     proff1.push(p);
     proff2.splice(index, 1);
-    updateState({availableProffs:proff1, appliedProffs:proff2})
+    updateState({ availableProffs: proff1, appliedProffs: proff2 });
   }
 
   function upvoteProff(p) {
@@ -52,7 +55,7 @@ function StudentDashboard() {
     if (index > 0) {
       [proff2[index - 1], proff2[index]] = [proff2[index], proff2[index - 1]];
     }
-    updateState({availableProffs:proff1, appliedProffs:proff2})
+    updateState({ availableProffs: proff1, appliedProffs: proff2 });
   }
 
   let AvailableProffListJSX = [];
@@ -67,7 +70,7 @@ function StudentDashboard() {
   for (let p2 of proff2) {
     AppliedProffListJSX.push(
       <AppliedProffCard
-        key ={p2._id}
+        key={p2._id}
         proffData={p2}
         slNo={i++}
         func={removeProffs}
@@ -91,24 +94,59 @@ function StudentDashboard() {
       console.log(res);
     });
   }
-  
+
+  function lockAppliedProffHandler() {
+    axios({
+      method: "post",
+      url: `http://localhost:8000/s/${userObject._id}/lock`,
+      data: {},
+      withCredentials: true,
+    }).then((res) => {
+      console.log(res);
+    });
+    setIsLocked(true);
+  }
+  let j = 1;
   return (
     <>
       <div>
-        <div className="card-group">
-          <div className="card out">
-            <h4>Available Proffs</h4>
-            {AvailableProffListJSX}
-          </div>
-          <div className="card out">
-            <h4>Applied Proffs</h4>
-            {AppliedProffListJSX}
-          </div>
+        <div className="card-group done">
+          {isLocked && (
+            <div>
+              <h4>Final Applied Proffs</h4>
+              {proff2.map((p2) => (
+                <AppliedProffCardLocked
+                  key={p2._id}
+                  proffData={p2}
+                  slNo={j++}
+                />
+              ))}
+            </div>
+          )}
+          {!isLocked && (
+            <>
+              <div className="card out">
+                <h4>Available Proffs</h4>
+                {AvailableProffListJSX}
+              </div>
+              <div className="card out">
+                <h4>Applied Proffs</h4>
+                {AppliedProffListJSX}
+              </div>
+            </>
+          )}
         </div>
       </div>
-      <div>
-        <button onClick={saveAppliedProffHandler}>SAVE</button>
-      </div>
+      {!isLocked && (
+        <>
+          <div>
+            <button onClick={saveAppliedProffHandler}>SAVE</button>
+          </div>
+          <div>
+            <button onClick={lockAppliedProffHandler}>LOCK</button>
+          </div>
+        </>
+      )}
     </>
   );
 }

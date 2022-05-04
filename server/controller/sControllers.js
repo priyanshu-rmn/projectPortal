@@ -52,6 +52,12 @@ const POSTdashboard = async (req, res) => {
     res.status(201).json(updatedData);
 }
 
+const POSTlock = async (req, res) => {
+    const { id } = req.params;
+    const updatedData = await db.Student.findByIdAndUpdate(id, { isLocked: true },{new:true});
+    res.status(201).json({updatedData});
+}
+
 const GETprofileData = async (req, res) => {
     console.log("/profile : ",req.user);
     const { rollNo } = req.params;        
@@ -75,6 +81,7 @@ const POSTprofileData = async (req, res) => {
 const sControllers = {
     GETdashboard: GETdashboard,
     POSTdashboard: POSTdashboard,
+    POSTlock : POSTlock,
     GETprofileData: GETprofileData,
     POSTprofileData: POSTprofileData,
 }
