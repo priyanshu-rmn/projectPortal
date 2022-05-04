@@ -18,14 +18,19 @@
     margin-left : 5rem;
 }
 
-#heading{
+.heading{
     font-size: 4rem;
     font-weight: bold;
     color : #9F5691;
-    margin-bottom: 1rem;;
+    margin-bottom: 1rem;
 }
 #text-content{
     font-size : 2rem;
     color : #9F5691;
+}
+
+.logout{
+    font-size:"40px" ; 
+    margin-bottom: 1rem;
 }
 
