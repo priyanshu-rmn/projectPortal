@@ -24,7 +24,9 @@ function StudentProfileReg() {
 
   return (
     <>
-      <h1>Profile Registration</h1>
+  
+      <h2 style={{textAlign:"center"}}>Profile Registration</h2>
+   
       <StudentProfileRegForm
         user={userObject}
         onAddStudent={addStudentHandler}
