@@ -3,8 +3,8 @@ import { AiOutlinePlusCircle } from 'react-icons/ai';
 function AvailableProffCard(props){
     return (
         <div className='card in'>
-            <span> {props.text} </span>    
-          <span><AiOutlinePlusCircle style={{fontSize:"25px" ,color: "green" ,cursor:"pointer"}} onClick={()=> props.func(props.text) }/></span>
+            <span> {props.proffData.fName +" "+ props.proffData.lName  } </span>    
+          <span><AiOutlinePlusCircle style={{fontSize:"25px" ,color: "green" ,cursor:"pointer"}} onClick={()=> props.func(props.proffData) }/></span>
         </div>
     );
 }

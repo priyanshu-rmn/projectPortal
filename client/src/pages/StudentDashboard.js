@@ -3,74 +3,72 @@ import AppliedProffCard from "../components/AppliedProffCard";
 import "./StudentDashboard.css";
 import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../UserContext";
-import { Link } from "react-router-dom";
-import axios from "axios"
-let proff1 = ["AKT", "RNC", "KKS", "BB"]; //proff1 - available proff
-let proff2 = ["PC", "MAS"]; //proff2 - applied proff
+import axios from "axios";
 
 function StudentDashboard() {
+  const [studentData, setstudentData] = useState({});
+  const [state, updateState] = useState({ availableProffs: [], appliedProffs: [] })
+  let proff1 = state.availableProffs;
+  let proff2 = state.appliedProffs;
+  
+
   const userObject = useContext(UserContext);
-  const [old, updated] = useState([]);
-  if (!Object.keys(userObject).length) {
-    return (
-      <>
-        <div>Not Logged In</div>
-        <Link to="/login">Login</Link>
-      </>
+  
+  useEffect(() => {
+    console.log(userObject);
+    axios
+      .get(`http://localhost:8000/s/${userObject._id}/dashboard`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        console.log("got it");
+        console.log(res.data);
+        proff1 = res.data.availableProffs;
+        proff2 = res.data.appliedProffs;
+        
+        updateState({availableProffs:proff1, appliedProffs:proff2})
+      });
+  }, [userObject]);
+
+  function addProffs(p) {
+    console.log(`clicked ${p.fName}`);
+    let index = proff1.indexOf(p);
+    proff2.push(p);
+    proff1.splice(index, 1);
+    updateState({availableProffs:proff1, appliedProffs:proff2})
+  }
+
+  function removeProffs(p) {
+    console.log(`clicked ${p.fName}`);
+    let index = proff2.indexOf(p);
+    proff1.push(p);
+    proff2.splice(index, 1);
+    updateState({availableProffs:proff1, appliedProffs:proff2})
+  }
+
+  function upvoteProff(p) {
+    console.log(`clicked ${p.fName}`);
+    let index = proff2.indexOf(p);
+    if (index > 0) {
+      [proff2[index - 1], proff2[index]] = [proff2[index], proff2[index - 1]];
+    }
+    updateState({availableProffs:proff1, appliedProffs:proff2})
+  }
+
+  let AvailableProffListJSX = [];
+  for (let p1 of proff1) {
+    AvailableProffListJSX.push(
+      <AvailableProffCard key={p1._id} proffData={p1} func={addProffs} />
     );
   }
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8000/s/${userObject._id}/dashboard`)
-      .then((res) => {
-        console.log(res);
-        proff1 = res.availableProffs;
-        proff2 = res.appliedProffs;
-        updated([proff1, proff2]);
-      });
-  },[userObject]);
-
-  function addProffs(name) {
-    console.log(`clicked ${name}`);
-    let index = proff1.indexOf(name);
-    proff2.push(name);
-    proff1.splice(index, 1);
-    updated([proff1, proff2]);
-  }
-
-  function removeProffs(name) {
-    console.log(`clicked ${name}`);
-    let index = proff2.indexOf(name);
-    proff1.push(name);
-    proff2.splice(index, 1);
-    updated([proff1, proff2]);
-  }
-
-  function upvoteProff(name) {
-    console.log(`clicked ${name}`);
-    let index = proff2.indexOf(name);
-    if (index > 0) {
-      let up = proff2[index - 1];
-      proff2[index - 1] = proff2[index];
-      proff2[index] = up;
-    }
-    updated([proff1, proff2]);
-  }
-
-  let AvailableProffList = [];
-  for (let p1 of proff1) {
-    console.log(`1- ${p1}`);
-    AvailableProffList.push(<AvailableProffCard text={p1} func={addProffs} />);
-  }
-
-  let AppliedProffList = [];
+  let AppliedProffListJSX = [];
   let i = 1;
   for (let p2 of proff2) {
-    console.log(p2);
-    AppliedProffList.push(
+    AppliedProffListJSX.push(
       <AppliedProffCard
-        text={p2}
+        key ={p2._id}
+        proffData={p2}
         slNo={i++}
         func={removeProffs}
         func2={upvoteProff}
@@ -78,21 +76,40 @@ function StudentDashboard() {
     );
   }
 
-  console.log("list1", AvailableProffList);
-  console.log("list2", AppliedProffList);
+  console.log("list1", proff1);
+  console.log("list2", proff2);
+
+  function saveAppliedProffHandler() {
+    axios({
+      method: "post",
+      url: `http://localhost:8000/s/${userObject._id}/dashboard`,
+      data: {
+        newAppliedProff: proff2,
+      },
+      withCredentials: true,
+    }).then((res) => {
+      console.log(res);
+    });
+  }
+  
   return (
-    <div>
-      <div className="card-group">
-        <div className="card out">
-          <h4>Available Proffs</h4>
-          {AvailableProffList}
-        </div>
-        <div className="card out">
-          <h4>Applied Proffs</h4>
-          {AppliedProffList}
+    <>
+      <div>
+        <div className="card-group">
+          <div className="card out">
+            <h4>Available Proffs</h4>
+            {AvailableProffListJSX}
+          </div>
+          <div className="card out">
+            <h4>Applied Proffs</h4>
+            {AppliedProffListJSX}
+          </div>
         </div>
       </div>
-    </div>
+      <div>
+        <button onClick={saveAppliedProffHandler}>SAVE</button>
+      </div>
+    </>
   );
 }
 

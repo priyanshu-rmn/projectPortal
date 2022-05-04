@@ -16,7 +16,6 @@ function StudentProfileRegForm(props) {
   const contactNoInputRef = useRef();
   const rollNoInputRef = useRef();
   function submitHandler(event) {
-    setRedirect(true)
     event.preventDefault();
     const enteredfName = fNameInputRef.current.value;
     const enteredlName = lNameInputRef.current.value;
@@ -32,11 +31,12 @@ function StudentProfileRegForm(props) {
       resumeLink: enteredresumeLink,
       email: enteredemail,
       currentCPI: enteredcurrentCPI,
-      contactNo: enteredcontactNo,
+      contactNo: enteredcontactNo,  
       rollNo: enteredrollNo,
       googleId: props.user.googleId
     }
     props.onAddStudent(studentData);
+    setRedirect(true)
   }
   
   if (rd) {
@@ -89,7 +89,6 @@ function StudentProfileRegForm(props) {
           <input type="text" name="rollNo" id="rollNo" required ref={rollNoInputRef} />
         </div>
         <button as={Link} to="/s/dashboard" type="submit">CONTINUE</button>
-        {/* <Link to="/page" onClick={() => alert("boo")}>Clickable Link</Link> */}
        
         <br />
       </form>

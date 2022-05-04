@@ -1,5 +1,22 @@
+import axios from "axios";
 import "./Header.css";
+import { useNavigate } from "react-router-dom";
+
 function Header() {
+  const navigate = useNavigate();
+  async function logoutHandler() {
+    console.log("in");
+    axios({
+      method: 'post',
+      url: 'http://localhost:8000/logout',
+      data: {
+      },
+      withCredentials:true
+    });
+    console.log("out");
+    navigate("/login");
+  }
+
   return (
     <>
       <header>
@@ -13,6 +30,7 @@ function Header() {
               Indian Institute of Technology (Banaras Hindu University) Varanasi{" "}
             </div>
           </div>
+          <button onClick={logoutHandler} >Logout</button>
         </div>
       </header>
     </>

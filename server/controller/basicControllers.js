@@ -13,11 +13,6 @@ function isStudent(email) {
     return flag;
 }
 
-function GETlogin(req, res) {
-    console.log("/login", req.user);// -->undefined
-    // console.log("session: ", req.sessionID); --->session id
-    res.render('login.ejs');
-}
 
 function GETprofileReg(req, res) {
     const userDetails = {
@@ -42,8 +37,6 @@ async function POSTprofileReg(req, res) {
         try {
             const response = await newStudent.save();
             console.log("OK", response);
-            // res.status(200).json(response);
-            // res.redirect("http://localhost:3000/s/dashboard");
         } catch (e) {
             console.log("ERROR ", e);
             res.send("Error while saving");
@@ -66,18 +59,19 @@ function GETprotected(req, res) {
     res.send('Protected');
 }
 
-function GETlogout(req, res) {
-    console.log("user", req.user);
+function POSTlogout(req, res) {
+    console.log("/logout-in", req.user);
     console.log("session", req.sessionID);
-    req.logout();
-    res.redirect("/login");
+    req.logout();  
+    res.send(req.user);
+    console.log("/logout-out", req.user);
+    console.log("session", req.sessionID);
 }
 
 const basicControllers = {
-    GETlogin: GETlogin,
     GETprofileReg: GETprofileReg,
     GETprotected: GETprotected,
-    GETlogout: GETlogout,
+    POSTlogout: POSTlogout,
     POSTprofileReg: POSTprofileReg,
     // POSTprofileData : POSTprofileData,
 }

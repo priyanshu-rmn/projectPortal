@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 
 const db = require("../models/db");
+const { all } = require('../routes/sRoutes');
 
 async function getProffList() {
     try {
@@ -25,29 +26,30 @@ async function getStudentDetails(id) {
 const GETdashboard = async (req, res) => {
     console.log("/dashboard : ", req.user);
     const { id } = req.params;
-    const allProffs = await getProffList();
+    const allProffs = await getProffList();//[{id=fgh,dsfkjhkdfsh}, {id= dskjfjh, kjsdfhsdf}]
     const studentData = await getStudentDetails(id);
-
-    const appliedProffs = studentData.proffOrder;
-    const availableProffs = allProffs.filter(p => !appliedProffs.includes(p.id));
-    
-    // const reqDataAvailableProffs = availableProffs.map(p => {
-    //     return { id : p.id, fullName: p.fullName,left :  p.left };
-    // })
-    // const reqDataAppliedProffs = appliedProffs.map(p => {
-    //     return { id : p.id, fullName: p.fullName,left :  p.left };
-    // })
-    console.log("availableProffs", availableProffs);
-    console.log("appliedProffs", appliedProffs);   
+    const appliedProffsIds = studentData.proffOrder;//[sdfjkdsj,sdkjhkdfh,sdfiuhdfh]
+    console.log(appliedProffsIds);
+    const appliedProffs = []
+    for (let pId of appliedProffsIds) {
+        for (let p of allProffs) {
+            if (p.id === pId) {
+                appliedProffs.push(p);
+            }
+        }
+    }
+    const availableProffs = allProffs.filter(p => !appliedProffsIds.includes(p.id));
     console.log("studentData", studentData);
-    res.send({availableProffs,appliedProffs,studentData});
+    res.status(200).json({availableProffs,appliedProffs,studentData});
 }
 
 const POSTdashboard = async (req, res) => {
-    const newProffOrder = req.body;
-    const { rollNo } = req.params;
-    await db.Student.updateOne({ rollNo: rollNo }, { proffOrder: newProffOrder });
-    res.send("updated");
+    const { id } = req.params;
+    const newProffOrderIds = req.body.newAppliedProff;
+    // console.log(newProffOrder);
+    const updatedData =  await db.Student.findByIdAndUpdate(id, { proffOrder: newProffOrderIds },{new:true});
+    console.log(updatedData);
+    res.status(201).json(updatedData);
 }
 
 const GETprofileData = async (req, res) => {

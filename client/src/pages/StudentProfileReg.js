@@ -10,18 +10,15 @@ const API_URL = "http://localhost:8000/";
 function StudentProfileReg() {
   const userObject = useContext(UserContext);
   console.log(userObject);
-  if (!Object.keys(userObject).length) {
-    return (
-      <>
-        <div>Not Logged In</div>
-        <Link to="/login">Login</Link>
-      </>
-    );
-  }
 
   function addStudentHandler(studentData) {
-    axios.post(API_URL + "profileReg", studentData).then((data) => {
-      console.log()
+    axios({
+      method: "post",
+      url: `http://localhost:8000/profileReg`,
+      data: {...studentData},
+      withCredentials: true,
+    }).then((res) => {
+      console.log(res);
     });
   }
 

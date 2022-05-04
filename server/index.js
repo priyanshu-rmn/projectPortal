@@ -63,10 +63,10 @@ app.use("/s", sRoutes); // use the sRoutes.js file to handle endpoints starting 
 app.use("/p", pRoutes);
 app.use("/a", aRoutes);
 app.use("/auth", authRoutes);
-
-app.get("/getUser", async (req, res) => {
+app.get("/getUser", (req, res) => {
   // const data = await db.Student.findById(req.user._id);
   // res.send(...data);
+  console.log("/getUser", req.user);
   res.send(req.user);
 });
 
