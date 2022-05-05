@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function UpperNavbar({isDashboard , setIsDashboard}){
 
@@ -45,15 +44,22 @@ export default function UpperNavbar({isDashboard , setIsDashboard}){
             </li>
 
             <li class="nav-item">
-            <div   style={{cursor:"pointer" ,paddingTop:"7px" ,paddingBottom:"7px" , backgroundColor:"rgba(0,0,0,0.5)"}} onClick={ClickProfile}>
-              <h3>PROFILE</h3>
-            </div>
+              <div
+                style={{
+                  cursor: "pointer",
+                  paddingTop: "7px",
+                  paddingBottom: "7px",
+                }}
+                onClick={ClickProfile}
+              >
+                <h3>PROFILE</h3>
+              </div>
             </li>
-            </ul>
-            </div>
-}
+          </ul>
         </div>
-    );
+       }
+    </div>
+  );
 }
 
 /*

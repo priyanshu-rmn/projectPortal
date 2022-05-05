@@ -1,19 +1,17 @@
 import axios from "axios";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
-import {BiAlignRight, BiLogOut} from "react-icons/bi"
+import { BiAlignRight, BiLogOut } from "react-icons/bi";
 
-
-function Header() {
+function Header(props) {
   const navigate = useNavigate();
   async function logoutHandler() {
     console.log("in");
     axios({
-      method: 'post',
-      url: 'http://localhost:8000/logout',
-      data: {
-      },
-      withCredentials:true
+      method: "post",
+      url: "http://localhost:8000/logout",
+      data: {},
+      withCredentials: true,
     });
     console.log("out");
     navigate("/login");
@@ -27,16 +25,16 @@ function Header() {
             <img src={require("../../images/logo.jpg")} alt="IIT-BHU-LOGO" />
           </div>
           <div className="text-container">
-            <div className="heading">Project Portal        
-          
-            <BiLogOut className="logout"  onClick={logoutHandler}></BiLogOut>
-          </div>
+            <div className="heading">
+              Project Portal
+              {props.showLogoutButton && (
+                <BiLogOut className="logout" onClick={logoutHandler}></BiLogOut>
+              )}
+            </div>
             <div id="text-content">
               Indian Institute of Technology (Banaras Hindu University) Varanasi{" "}
             </div>
           </div>
-          
-          
         </div>
       </header>
     </>
