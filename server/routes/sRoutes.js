@@ -21,9 +21,9 @@ router
 router.post("/:id/lock", controllers.POSTlock)
 
 router
-    .route("/:id/profile",isLoggedIn)
-    .get(controllers.GETprofileData)
-    .post(controllers.POSTprofileData)
+    .route("/:id/profile")
+    .get(isLoggedIn, controllers.GETprofileData)
+    .post(isLoggedIn,controllers.POSTprofileData)
 
 
 

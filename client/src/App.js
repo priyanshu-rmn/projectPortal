@@ -1,5 +1,5 @@
 // import "./App.css";
-import { Route, Routes, Link, Navigate } from "react-router-dom";
+import { Route, Routes, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import LoginPage from "./pages/LoginPage";
@@ -10,6 +10,7 @@ import Header from "./components/layout/Header";
 import Home from "./pages/Home";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
+import StudentProfilePage from "./pages/StudentProfilePage";
 
 function App() {
   const [isLoggedIn, setisLoggedIn] = useState(false);
@@ -28,11 +29,12 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/login" element={<LoginPage />} />
-        {/* method 1 */}
         {isLoggedIn && (
           <Route exact path="/s/dashboard" element={<StudentDashboard />} />
         )}
-        {/* method 2 */}
+        {isLoggedIn && (
+          <Route exact path="/s/profile" element={<StudentProfilePage />} />
+        )}
         {isLoggedIn && (
           <Route exact path="/s/profileReg" element={<StudentProfileReg />} />
         )}
