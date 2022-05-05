@@ -1,10 +1,9 @@
-.card-group {
-    width: 75%;
-    margin-left: 22%;
+.card-groupp {
+    display : flex;
     height: auto;
   }
   
-  .card-group > div
+  .card-groupp > div
   {
   flex:1 1 auto;
   text-align:center;
@@ -20,4 +19,12 @@
     background-color: rgba(0,0,0,0.1);
     box-shadow: 1 3px 7px rgba(0,0,0,0.5);
     padding: 1rem 2rem;
+  }
+
+  .bbutton>div
+  {
+  display: flex;
+  float: right;
+  margin-right: 2%;
+  margin-top:2%;
   }

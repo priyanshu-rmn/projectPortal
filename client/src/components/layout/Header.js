@@ -1,6 +1,8 @@
 import axios from "axios";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
+import {BiAlignRight, BiLogOut} from "react-icons/bi"
+
 
 function Header() {
   const navigate = useNavigate();
@@ -25,12 +27,16 @@ function Header() {
             <img src={require("../../images/logo.jpg")} alt="IIT-BHU-LOGO" />
           </div>
           <div className="text-container">
-            <div id="heading">Project Portal</div>
+            <div className="heading">Project Portal        
+          
+            <BiLogOut className="logout"  onClick={logoutHandler}></BiLogOut>
+          </div>
             <div id="text-content">
               Indian Institute of Technology (Banaras Hindu University) Varanasi{" "}
             </div>
           </div>
-          <button onClick={logoutHandler} >Logout</button>
+          
+          
         </div>
       </header>
     </>

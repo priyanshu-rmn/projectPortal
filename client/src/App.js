@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
 import StudentProfilePage from "./pages/StudentProfilePage";
+import UpperNavbar from "./components/layout/UpperNavbar";
 
 function App() {
   const [isLoggedIn, setisLoggedIn] = useState(false);
@@ -24,9 +25,15 @@ function App() {
 
   return (
     <>
+          
+    
       <Header />
 
+     
+      {isLoggedIn?<UpperNavbar></UpperNavbar> : null}
+      
       <Routes>
+        
         <Route exact path="/" element={<Home />} />
         <Route exact path="/login" element={<LoginPage />} />
         {isLoggedIn && (
@@ -51,7 +58,9 @@ function App() {
             </>
           }
         />
+    
       </Routes>
+      
     </>
   );
 }
