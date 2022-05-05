@@ -49,6 +49,7 @@ export default function UpperNavbar({isDashboard , setIsDashboard}){
                   cursor: "pointer",
                   paddingTop: "7px",
                   paddingBottom: "7px",
+                  backgroundColor:"rgba(0,0,0,0.5)"
                 }}
                 onClick={ClickProfile}
               >
