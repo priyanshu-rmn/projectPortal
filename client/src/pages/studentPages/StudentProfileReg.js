@@ -1,7 +1,7 @@
 import axios from "axios";
-import StudentProfileRegForm from "../components/StudentProfileRegForm";
+import StudentProfileRegForm from "../../components/students/StudentProfileRegForm";
 import { useContext } from "react";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../../UserContext";
 
 
 function StudentProfileReg() {

@@ -1,9 +1,9 @@
-import AvailableProffCard from "../components/AvailableProffCard";
-import AppliedProffCard from "../components/AppliedProffCard";
-import AppliedProffCardLocked from "../components/AppliedProffCardLocked ";
+import AvailableProffCard from "../../components/students/AvailableProffCard";
+import AppliedProffCard from "../../components/students/AppliedProffCard";
+import AppliedProffCardLocked from "../../components/students/AppliedProffCardLocked ";
 import "./StudentDashboard.css";
 import { useState, useContext, useEffect } from "react";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../../UserContext";
 import axios from "axios";
 
 function StudentDashboard() {
