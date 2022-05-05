@@ -1,6 +1,7 @@
 import LoginButton from "../components/LoginButton";
 import './LoginPage.css'
-function LoginPage() {
+function LoginPage({setIsLoggedIn}) {
+  setIsLoggedIn(false);
   return (
     <>
       <section>
