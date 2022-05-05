@@ -31,12 +31,16 @@ function App() {
   }, [userObject]);
 
   return (
-    <>
-      <Header showLogoutButton={isLoggedIn} />
-      {isLoggedIn && <UpperNavbar showNavBar={isLoggedIn} />}
+    <>   
+      <Header showLogoutButton={ isLoggedIn}/>
+     
+      {isLoggedIn && <UpperNavbar />}
+      
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path="/login" element={<LoginPage />} />
+        <Route exact path="/login" element={<LoginPage setIsLoggedIn={setisLoggedIn}/>} />
+        {/* method 1 */}
+
         {isLoggedIn && (
           <Route exact path="/s/dashboard" element={<StudentDashboard />} />
         )}

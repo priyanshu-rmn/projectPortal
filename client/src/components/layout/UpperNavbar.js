@@ -33,26 +33,38 @@ export default function (props) {
     navigate("/p/selectedStudents");
   };
 
-  if (props.showNavBar) {
-    return (
-      <div>
-        {/* {isDashboard ? ( */}
-        <div style={{ margin: "2%", backgroundColor: "rgba(0,0,0,0.1)" }}>
-          <ul class="nav nav-tabs nav-fill">
-            <li class="nav-item">
-              <div
-                style={{
-                  cursor: "pointer",
-                  paddingTop: "7px",
-                  paddingBottom: "7px",
-                  // backgroundColor: "rgba(0,0,0,0.5)",
-                }}
-                onClick={ClickDashboard}
-              >
-                <h3>DASHBOARD</h3>
-              </div>
-            </li>
+  return (
+    <div>
+      {/* {isDashboard ? ( */}
+      <div style={{ margin: "2%", backgroundColor: "rgba(0,0,0,0.1)" }}>
+        <ul class="nav nav-tabs nav-fill">
+          <li class="nav-item">
+            <div
+              style={{
+                cursor: "pointer",
+                paddingTop: "7px",
+                paddingBottom: "7px",
+                // backgroundColor: "rgba(0,0,0,0.5)",
+              }}
+              onClick={ClickDashboard}
+            >
+              <h3>DASHBOARD</h3>
+            </div>
+          </li>
 
+          <li class="nav-item">
+            <div
+              style={{
+                cursor: "pointer",
+                paddingTop: "7px",
+                paddingBottom: "7px",
+              }}
+              onClick={ClickProfile}
+            >
+              <h3>PROFILE</h3>
+            </div>
+          </li>
+          {!isStud && (
             <li class="nav-item">
               <div
                 style={{
@@ -60,28 +72,15 @@ export default function (props) {
                   paddingTop: "7px",
                   paddingBottom: "7px",
                 }}
-                onClick={ClickProfile}
+                onClick={ClickSelectedStudents}
               >
-                <h3>PROFILE</h3>
+                <h3>SELECTED STUDENTS</h3>
               </div>
             </li>
-            {!isStud && (
-              <li class="nav-item">
-                <div
-                  style={{
-                    cursor: "pointer",
-                    paddingTop: "7px",
-                    paddingBottom: "7px",
-                  }}
-                  onClick={ClickSelectedStudents}
-                >
-                  <h3>SELECTED STUDENTS</h3>
-                </div>
-              </li>
-            )}
-          </ul>
-        </div>
-        {/* ) : (
+          )}
+        </ul>
+      </div>
+      {/* ) : (
           <div style={{ margin: "2%", backgroundColor: "rgba(0,0,0,0.1)" }}>
             <ul class="nav nav-tabs nav-fill">
               <li class="nav-item">
@@ -113,9 +112,6 @@ export default function (props) {
             </ul>
           </div>
         )} */}
-      </div>
-    );
-  } else {
-    return <></>;
-  }
+    </div>
+  );
 }
