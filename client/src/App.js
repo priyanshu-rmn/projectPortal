@@ -2,17 +2,23 @@
 import { Route, Routes, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
+
 import StudentDashboard from "./pages/studentPages/StudentDashboard";
 import StudentProfileReg from "./pages/studentPages/StudentProfileReg";
 import StudentProfilePage from "./pages/studentPages/StudentProfilePage";
 
-import ProffDashboard from "./pages/ProffDashboard";
+import ProffDashboard from "./pages/proffPages/ProffDashboard";
+import ProffProfileReg from "./pages/proffPages/ProffProfileReg";
+import ProffProfilePage from "./pages/proffPages/ProffProfilePage";
+import ProffSelectedStudentsPage from "./pages/proffPages/ProffSelectedStudentsPage";
+
 import Header from "./components/layout/Header";
-import Home from "./pages/Home";
+import UpperNavbar from "./components/layout/UpperNavbar";
+
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
-import UpperNavbar from "./components/layout/UpperNavbar";
 
 function App() {
   const [isLoggedIn, setisLoggedIn] = useState(false);
@@ -27,7 +33,7 @@ function App() {
   return (
     <>
       <Header showLogoutButton={isLoggedIn} />
-      {isLoggedIn && <UpperNavbar></UpperNavbar>}
+      {isLoggedIn && <UpperNavbar showNavBar={isLoggedIn} />}
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/login" element={<LoginPage />} />
@@ -43,7 +49,15 @@ function App() {
         {isLoggedIn && (
           <Route exact path="/p/dashboard" element={<ProffDashboard />} />
         )}
-        {/* <Route exact path="/p/profileReg" element={<ProffProfileRegistration />} /> */}
+        {isLoggedIn && (
+          <Route exact path="/p/profileReg" element={<ProffProfileReg />} />
+        )}
+        {isLoggedIn && (
+          <Route exact path="/p/profile" element={<ProffProfilePage />} />
+        )}
+        {isLoggedIn && (
+          <Route exact path="/p/selectedStudents" element={<ProffSelectedStudentsPage/>} />
+        )}
         <Route
           path="*"
           element={

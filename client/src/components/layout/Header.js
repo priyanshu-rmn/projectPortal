@@ -1,7 +1,7 @@
 import axios from "axios";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
-import { BiAlignRight, BiLogOut } from "react-icons/bi";
+import { BiLogOut } from "react-icons/bi";
 
 function Header(props) {
   const navigate = useNavigate();

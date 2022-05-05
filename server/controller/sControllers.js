@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 
 const db = require("../models/db");
-const { all } = require('../routes/sRoutes');
 
 async function getProffList() {
     try {
@@ -24,12 +23,11 @@ async function getStudentDetails(id) {
 
 
 const GETdashboard = async (req, res) => {
-    console.log("/dashboard : ", req.user);
     const { id } = req.params;
+    console.log("/dashboard : ", req.user);
     const allProffs = await getProffList();//[{id=fgh,dsfkjhkdfsh}, {id= dskjfjh, kjsdfhsdf}]
     const studentData = await getStudentDetails(id);
     const appliedProffsIds = studentData.proffOrder;//[sdfjkdsj,sdkjhkdfh,sdfiuhdfh]
-    console.log(appliedProffsIds);
     const appliedProffs = []
     for (let pId of appliedProffsIds) {
         for (let p of allProffs) {
@@ -69,8 +67,6 @@ const GETprofileData = async (req, res) => {
 const POSTprofileData = async (req, res) => {
     console.log("/POSTprofile ", req.user);
     const { id } = req.params;
-    console.log("id", id);
-    console.log(req.body);
     const newProfileData = req.body;
     const updatedData = await db.Student.findByIdAndUpdate(id, { ...newProfileData }, { new: true });
     console.log(updatedData);

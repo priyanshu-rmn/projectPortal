@@ -43,11 +43,10 @@ async function POSTprofileReg(req, res) {
         }
     }
     else {
-        const newProff = new db.Proff({ ...data, id : uuid() });
+        const newProff = new db.Proff(data );
         try {
-            await newProff.save();
-            res.redirect(`http://localhost:3000/p/dashboard`);
-
+            const response = await newProff.save();
+            console.log("OK", response);
         } catch (e) {
             console.log("ERROR ", e);
             res.send("Error while saving");

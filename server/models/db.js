@@ -17,6 +17,7 @@ const proffSchema = mongoose.Schema({
   tempSavedStudents: {
     type: [String],
   },
+  googleId: Number
 });
 
 proffSchema.virtual("fullName").get(function () {

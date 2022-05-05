@@ -1,22 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../UserContext";
 
-export default function () {
-  const [isDashboard, setIsDashboard] = useState(true);
+function isStudent(email) {
+  const decidingChar = email[email.indexOf("@") - 1];
+  let flag = false;
+  if (decidingChar >= "0" && decidingChar <= "9") {
+    flag = true;
+  }
+  return flag;
+}
+
+export default function (props) {
+  // const [isDashboard, setIsDashboard] = useState(true);
   const navigate = useNavigate();
+  const userObject = useContext(UserContext);
+  const isStud = isStudent(userObject.email);
+
   const ClickDashboard = () => {
-    setIsDashboard(true);
-    navigate("/s/dashboard");
+    // setIsDashboard(true);
+    if (isStud) navigate("/s/dashboard");
+    else navigate("/p/dashboard");
   };
 
   const ClickProfile = () => {
-    setIsDashboard(false);
-    navigate("/s/profile");
+    // setIsDashboard(false);
+    if (isStud) navigate("/s/profile");
+    else navigate("/p/profile");
   };
 
-  return (
-    <div>
-      {isDashboard ? (
+  const ClickSelectedStudents = () => {
+    navigate("/p/selectedStudents");
+  };
+
+  if (props.showNavBar) {
+    return (
+      <div>
+        {/* {isDashboard ? ( */}
         <div style={{ margin: "2%", backgroundColor: "rgba(0,0,0,0.1)" }}>
           <ul class="nav nav-tabs nav-fill">
             <li class="nav-item">
@@ -25,7 +45,7 @@ export default function () {
                   cursor: "pointer",
                   paddingTop: "7px",
                   paddingBottom: "7px",
-                  backgroundColor: "rgba(0,0,0,0.5)",
+                  // backgroundColor: "rgba(0,0,0,0.5)",
                 }}
                 onClick={ClickDashboard}
               >
@@ -45,84 +65,57 @@ export default function () {
                 <h3>PROFILE</h3>
               </div>
             </li>
+            {!isStud && (
+              <li class="nav-item">
+                <div
+                  style={{
+                    cursor: "pointer",
+                    paddingTop: "7px",
+                    paddingBottom: "7px",
+                  }}
+                  onClick={ClickSelectedStudents}
+                >
+                  <h3>SELECTED STUDENTS</h3>
+                </div>
+              </li>
+            )}
           </ul>
         </div>
-      ) : (
-        <div style={{ margin: "2%", backgroundColor: "rgba(0,0,0,0.1)" }}>
-          <ul class="nav nav-tabs nav-fill">
-            <li class="nav-item">
-              <div
-                style={{
-                  cursor: "pointer",
-                  paddingTop: "7px",
-                  paddingBottom: "7px",
-                }}
-                onClick={ClickDashboard}
-              >
-                <h3>DASHBOARD</h3>
-              </div>
-            </li>
-
-            <li class="nav-item">
-              <div
-                style={{
-                  cursor: "pointer",
-                  paddingTop: "7px",
-                  paddingBottom: "7px",
-                  backgroundColor: "rgba(0,0,0,0.5)",
-                }}
-                onClick={ClickProfile}
-              >
-                <h3>PROFILE</h3>
-              </div>
-            </li>
-          </ul>
-        </div>
-      )}
-    </div>
-  );
-}
-
-/*
-          <div style={{display : "flex"}}>
-            <div style={{backgroundColor: "rgba(0,0,0,0.1)", boxShadow:" 1 3px 7px rgba(0,0,0,0.5)",padding: "1rem 2rem"}}>
-                <h3>DASHBOARD</h3>
-             
-              </div>
-              <div style={{backgroundColor: "rgba(0,0,0,0.1)", boxShadow:" 1 3px 7px rgba(0,0,0,0.5)",padding: "1rem 2rem"}} >
-                <h3>PROFILE</h3>
-              </div>
-              </div>
-*/
-/*
-<div style={{margin:"2%", backgroundColor:"rgba(0,0,0,0.1)"}} >
+        {/* ) : (
+          <div style={{ margin: "2%", backgroundColor: "rgba(0,0,0,0.1)" }}>
             <ul class="nav nav-tabs nav-fill">
-  <li class="nav-item">
-  <div   style={{cursor:"pointer" ,paddingTop:"7px" ,paddingBottom:"7px" , backgroundColor:"rgba(0,0,0,0.1)"}}>
-               <h3>DASHBOARD</h3>
-        </div>
-  </li>
+              <li class="nav-item">
+                <div
+                  style={{
+                    cursor: "pointer",
+                    paddingTop: "7px",
+                    paddingBottom: "7px",
+                  }}
+                  onClick={ClickDashboard}
+                >
+                  <h3>DASHBOARD</h3>
+                </div>
+              </li>
 
-  <li class="nav-item">
-  <div   style={{cursor:"pointer" ,paddingTop:"7px" ,paddingBottom:"7px"}}>
-              <h3>PROFILE</h3>
-        </div>
-  </li>
-</ul>
-</div>
-*/
-
-/*
-          <div style={{margin:"2%",padding:"10px", backgroundColor:"rgba(0,0,0,0.1)",display:"flex"}} >
-        <div   style={{cursor:"pointer"   ,  paddingTop:"7px" , marginLeft:"17%",textDecoration: "underline"}}>
-               DASHBOARD
-        </div>
-        <div  style={{marginLeft:"25%" ,padding:"0px 0px 0px 0px"}}>
-              |
-        </div>
-        <div  style={{cursor:"pointer" , paddingTop:"7px",marginLeft:"" , textDecoration: "underline"}}>
-               PROFILE
-        </div>
-        
-    </div>  
-*/
+              <li class="nav-item">
+                <div
+                  style={{
+                    cursor: "pointer",
+                    paddingTop: "7px",
+                    paddingBottom: "7px",
+                    backgroundColor: "rgba(0,0,0,0.5)",
+                  }}
+                  onClick={ClickProfile}
+                >
+                  <h3>PROFILE</h3>
+                </div>
+              </li>
+            </ul>
+          </div>
+        )} */}
+      </div>
+    );
+  } else {
+    return <></>;
+  }
+}
