@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-import { UserContext } from "../UserContext";
-import StudentProfilePageForm from "../components/students/StudentProfilePageForm";
+import { UserContext } from "../../UserContext";
+import StudentProfilePageForm from "../../components/students/StudentProfilePageForm";
 
 function StudentProfilePage() {
   const userObject = useContext(UserContext);

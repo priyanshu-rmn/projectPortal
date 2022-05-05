@@ -1,7 +1,7 @@
 import "./ProffDashboard.css";
 import {useState} from 'react';
-import SelectStudentCard from '../components/SelectStudentCard';
-import RemoveStudentCard from '../components/RemoveStudentCard';
+import SelectStudentCard from '../components/proffs/SelectStudentCard';
+import RemoveStudentCard from '../components/proffs/RemoveStudentCard';
 
 let stud1 = [ "Rahul", "Deva", "Kush", "Shim"];      //stud1 - available proff
 let stud2 = ["Raman", "Vans","Ans"];                 //stud2 - applied proff

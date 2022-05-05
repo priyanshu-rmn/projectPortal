@@ -3,14 +3,15 @@ import { Route, Routes, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import LoginPage from "./pages/LoginPage";
-import StudentDashboard from "./pages/StudentDashboard";
+import StudentDashboard from "./pages/studentPages/StudentDashboard";
+import StudentProfileReg from "./pages/studentPages/StudentProfileReg";
+import StudentProfilePage from "./pages/studentPages/StudentProfilePage";
+
 import ProffDashboard from "./pages/ProffDashboard";
-import StudentProfileReg from "./pages/StudentProfileReg";
 import Header from "./components/layout/Header";
 import Home from "./pages/Home";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
-import StudentProfilePage from "./pages/StudentProfilePage";
 import UpperNavbar from "./components/layout/UpperNavbar";
 import logo from "./images/bg-image.jpeg"
 function App() {
