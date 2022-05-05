@@ -110,7 +110,7 @@ function StudentDashboard() {
   return (
     <>
       <div>
-        <div className="card-group done">
+        <div className="card-groupp">
           {isLocked && (
             <div>
               <h4>Final Applied Proffs</h4>
