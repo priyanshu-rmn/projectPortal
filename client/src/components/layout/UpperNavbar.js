@@ -2,10 +2,8 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
+export default function UpperNavbar({isDashboard , setIsDashboard}){
 
-export default function(){
-
-    const[isDashboard , setIsDashboard] = useState(true);
     const navigate = useNavigate();
     const ClickDashboard =()=> {
         setIsDashboard(true);

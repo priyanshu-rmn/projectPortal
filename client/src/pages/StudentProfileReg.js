@@ -1,10 +1,7 @@
 import axios from "axios";
 import StudentProfileRegForm from "../components/StudentProfileRegForm";
-// import './StudentProfileReg.css';
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
-import { Link } from "react-router-dom";
-const API_URL = "http://localhost:8000/";
 
 
 function StudentProfileReg() {

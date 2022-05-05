@@ -6,12 +6,13 @@ import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../UserContext";
 import axios from "axios";
 
-function StudentDashboard() {
+function StudentDashboard({setIsDashboard}) {
   const [isLocked, setIsLocked] = useState(true);
   const [state, updateState] = useState({
     availableProffs: [],
     appliedProffs: [],
   });
+  setIsDashboard(true);
   let proff1 = state.availableProffs;
   let proff2 = state.appliedProffs;
 

@@ -36,7 +36,7 @@ const GETdashboard = async (req, res) => {
             if (p.id === pId) {
                 appliedProffs.push(p);
             }
-        }
+        }       
     }
     const availableProffs = allProffs.filter(p => !appliedProffsIds.includes(p.id));
     console.log("studentData", studentData);
@@ -59,20 +59,22 @@ const POSTlock = async (req, res) => {
 }
 
 const GETprofileData = async (req, res) => {
-    console.log("/profile : ",req.user);
-    const { rollNo } = req.params;        
-    const studentDetails = await getStudentDetails(rollNo);
-    // console.log( { ...studentDetails._doc });
-    res.render('profileStudent', { ...studentDetails._doc, });
+    console.log("/GETprofile : ",req.user);
+    const { id } = req.params;        
+    const studentDetails = await getStudentDetails(id);
+    console.log( "/GETprofile studentDetails",studentDetails );
+    res.status(200).json(studentDetails);
 }
 
 const POSTprofileData = async (req, res) => {
-    const { rollNo } = req.params;
-    const newData = req.body;
-    //MISTAKE : SELECTED PROFF LIST WILL BE REMOVED
-    const updatedDoc = await db.Student.findOneAndReplace({ rollNo: rollNo }, newData, { new: true })
-    // console.log(updatedDoc);
-    res.redirect(`/s/${rollNo}/dashboard`);
+    console.log("/POSTprofile ", req.user);
+    const { id } = req.params;
+    console.log("id", id);
+    console.log(req.body);
+    const newProfileData = req.body;
+    const updatedData = await db.Student.findByIdAndUpdate(id, { ...newProfileData }, { new: true });
+    console.log(updatedData);
+    res.status(201).json(updatedData);
 }
 
 

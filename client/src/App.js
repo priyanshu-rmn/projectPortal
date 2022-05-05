@@ -1,5 +1,5 @@
 // import "./App.css";
-import { Route, Routes, Link, Navigate } from "react-router-dom";
+import { Route, Routes, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import LoginPage from "./pages/LoginPage";
@@ -10,10 +10,12 @@ import Header from "./components/layout/Header";
 import Home from "./pages/Home";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
+import StudentProfilePage from "./pages/StudentProfilePage";
 import UpperNavbar from "./components/layout/UpperNavbar";
 import logo from "./images/bg-image.jpeg"
 function App() {
   const [isLoggedIn, setisLoggedIn] = useState(false);
+  const[isDashboard , setIsDashboard] = useState(true);
   const userObject = useContext(UserContext);
   console.log(userObject, isLoggedIn);
   useEffect(() => {
@@ -27,7 +29,7 @@ function App() {
     
       <Header/>
      
-      {isLoggedIn && <UpperNavbar/>}
+      {isLoggedIn && <UpperNavbar isDashboard={isDashboard} setIsDashboard={setIsDashboard}/>}
       
       <Routes>
         <Route exact path="/" element={<Home />} />
@@ -35,9 +37,11 @@ function App() {
         {/* method 1 */}
 
         {isLoggedIn && (
-          <Route exact path="/s/dashboard" element={<StudentDashboard />} />
+          <Route exact path="/s/dashboard" element={<StudentDashboard setIsDashboard={setIsDashboard}/>} />
         )}
-        {/* method 2 */}
+        {isLoggedIn && (
+          <Route exact path="/s/profile" element={<StudentProfilePage />} />
+        )}
         {isLoggedIn && (
           <Route exact path="/s/profileReg" element={<StudentProfileReg />} />
         )}
