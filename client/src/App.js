@@ -25,15 +25,9 @@ function App() {
 
   return (
     <>
-          
-    
-      <Header />
-
-     
-      {isLoggedIn?<UpperNavbar></UpperNavbar> : null}
-      
+      <Header showLogoutButton={isLoggedIn} />
+      {isLoggedIn && <UpperNavbar></UpperNavbar>}
       <Routes>
-        
         <Route exact path="/" element={<Home />} />
         <Route exact path="/login" element={<LoginPage />} />
         {isLoggedIn && (
@@ -58,9 +52,7 @@ function App() {
             </>
           }
         />
-    
       </Routes>
-      
     </>
   );
 }
