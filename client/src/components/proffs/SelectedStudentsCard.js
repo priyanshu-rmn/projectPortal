@@ -1,6 +1,6 @@
 import "./SelectedStudentsCard.css";
 function SelectedStudentsCard(props) {
-  console.log(props);
+  console.log(props.studentDetails.fName + " " + props.studentDetails.lName);
   let i = 1;
   return (
     <div className="card in">

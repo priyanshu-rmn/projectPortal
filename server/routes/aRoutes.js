@@ -1,26 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const aControllers = require('../controller/aControllers')
+const { GETdashboard, POSTdashboard, GETfaculties} = require('../controller/aControllers')
 
 router
     .route("/dashboard")
-    // /s/20074026/dashboard
-    .get((req, res) => {
-        res.send('GET /a/dashboard')
-
-    })
-    .post((req, res) => {
-        res.send('POST /a/dashboard')
-    })
+    .get(GETdashboard)
+    .post(POSTdashboard)
 
 router
     .route("/faculties")
-    .get((req, res) => {
-        res.send('GET /a/faculties')
+    .get(GETfaculties)
 
-    })
-    .post((req, res) => {
-        res.send('POST /a/faculties')
-    })
 
 module.exports = router;

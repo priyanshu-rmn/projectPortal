@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 
 const proffSchema = mongoose.Schema({
   fName: String,
-  lName: String,
+  lName: {
+    type: String,
+    default : "",
+  },
   email: {
     type: String,
     required: true,
@@ -62,6 +65,17 @@ const studentSchema = mongoose.Schema({
   },
 });
 
+const adminSchema = mongoose.Schema({
+  fName: {
+    type: String,
+    default: "ADMIN"
+  },
+  maxStudentIntake : {
+    type: Number,
+    default: 8,
+  }
+});
+
 studentSchema.virtual("fullName").get(function () {
   return `${this.fName} ${this.lName}`;
 });
@@ -85,6 +99,7 @@ const db = {
   Student: mongoose.model("Student", studentSchema),
   Proff: mongoose.model("Proff", proffSchema),
   User: mongoose.model("User", userSchema),
+  Admin: mongoose.model("Admin", adminSchema),
 };
 
 module.exports = db;

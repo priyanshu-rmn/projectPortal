@@ -32,7 +32,10 @@ router.route("/google/callback").get(
     // Successful authentication, redirect secrets.
     //if email of student or proff is present in  models then redirect to student-rollNo or proff-id dashboard
     console.log("/callback:  ",req.user);
-    if (isStudent(req.user.email)) {
+    if (req.user.email === "priyanshurmn1702@gmail.com") {
+      res.redirect(`http://localhost:3000/a/dashboard`);
+    }
+    else if (isStudent(req.user.email)) {
         try {
             const user = await db.Student.findOne({ email: req.user.email });
             if (user) res.redirect(`http://localhost:3000/s/dashboard`);

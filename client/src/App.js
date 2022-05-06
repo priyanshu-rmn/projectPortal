@@ -14,6 +14,10 @@ import ProffProfileReg from "./pages/proffPages/ProffProfileReg";
 import ProffProfilePage from "./pages/proffPages/ProffProfilePage";
 import ProffSelectedStudentsPage from "./pages/proffPages/ProffSelectedStudentsPage";
 
+import AdminDashboard from "./pages/adminPages/AdminDashboard";
+import FacultyPage from "./pages/adminPages/FacultyPage";
+
+
 import Header from "./components/layout/Header";
 import UpperNavbar from "./components/layout/UpperNavbar";
 
@@ -61,6 +65,12 @@ function App() {
         )}
         {isLoggedIn && (
           <Route exact path="/p/selectedStudents" element={<ProffSelectedStudentsPage/>} />
+        )}
+        {isLoggedIn && (
+          <Route exact path="/a/dashboard" element={<AdminDashboard/>} />
+        )}
+        {isLoggedIn && (
+          <Route exact path="/a/faculties" element={<FacultyPage/>} />
         )}
         <Route
           path="*"
