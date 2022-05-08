@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../context/UserContext";
 import ProffProfilePageForm from "../../components/proffs/ProffProfilePageForm";
 
 function ProffProfilePage() {

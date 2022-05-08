@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState ,useEffect,useContext} from "react";
 import SelectedStudentsCard from "../../components/proffs/SelectedStudentsCard";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../context/UserContext";
 
 
 export default function ProffSelectedStudentsPage() {

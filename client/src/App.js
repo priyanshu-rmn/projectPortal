@@ -2,7 +2,6 @@
 import { Route, Routes, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
 
 import StudentDashboard from "./pages/studentPages/StudentDashboard";
@@ -17,33 +16,32 @@ import ProffSelectedStudentsPage from "./pages/proffPages/ProffSelectedStudentsP
 import AdminDashboard from "./pages/adminPages/AdminDashboard";
 import FacultyPage from "./pages/adminPages/FacultyPage";
 
-
 import Header from "./components/layout/Header";
 import UpperNavbar from "./components/layout/UpperNavbar";
 
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./context/UserContext";
+import UseReducerLearn from "./context/UseReducerLearn";
 
 function App() {
-  const [isLoggedIn, setisLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const userObject = useContext(UserContext);
   console.log(userObject, isLoggedIn);
   useEffect(() => {
     if (Object.keys(userObject).length !== 0) {
-      setisLoggedIn(true);
+      setIsLoggedIn(true);
     }
   }, [userObject]);
 
   return (
-    <>   
-      <Header showLogoutButton={ isLoggedIn}/>
-     
+    <>
+      <Header isLoggedIn={isLoggedIn} setIsLoggedIn = {setIsLoggedIn} />
+
       {isLoggedIn && <UpperNavbar />}
       
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/login" element={<LoginPage setIsLoggedIn={setisLoggedIn}/>} />
-        {/* method 1 */}
+        <Route exact path="/" element={<UseReducerLearn />} />
+        <Route exact path="/login" element={<LoginPage />} />
 
         {isLoggedIn && (
           <Route exact path="/s/dashboard" element={<StudentDashboard />} />
@@ -64,13 +62,17 @@ function App() {
           <Route exact path="/p/profile" element={<ProffProfilePage />} />
         )}
         {isLoggedIn && (
-          <Route exact path="/p/selectedStudents" element={<ProffSelectedStudentsPage/>} />
+          <Route
+            exact
+            path="/p/selectedStudents"
+            element={<ProffSelectedStudentsPage />}
+          />
         )}
         {isLoggedIn && (
-          <Route exact path="/a/dashboard" element={<AdminDashboard/>} />
+          <Route exact path="/a/dashboard" element={<AdminDashboard />} />
         )}
         {isLoggedIn && (
-          <Route exact path="/a/faculties" element={<FacultyPage/>} />
+          <Route exact path="/a/faculties" element={<FacultyPage />} />
         )}
         <Route
           path="*"

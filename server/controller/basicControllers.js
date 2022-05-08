@@ -43,7 +43,7 @@ async function POSTprofileReg(req, res) {
         }
     }
     else {
-        const newProff = new db.Proff(data );
+        const newProff = new db.Proff(data);
         try {
             const response = await newProff.save();
             console.log("OK", response);

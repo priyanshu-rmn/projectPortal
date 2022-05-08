@@ -14,6 +14,7 @@ function Header(props) {
       withCredentials: true,
     });
     console.log("out");
+    props.setIsLoggedIn(false);
     navigate("/login");
   }
 
@@ -27,7 +28,7 @@ function Header(props) {
           <div className="text-container">
             <div className="heading">
               Project Portal
-              {props.showLogoutButton && (
+              {props.isLoggedIn && (
                 <BiLogOut className="logout" onClick={logoutHandler}></BiLogOut>
               )}
             </div>

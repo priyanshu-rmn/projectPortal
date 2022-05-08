@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../context/UserContext";
 
 function isStudent(email) {
   const decidingChar = email[email.indexOf("@") - 1];

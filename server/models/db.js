@@ -73,6 +73,18 @@ const adminSchema = mongoose.Schema({
   maxStudentIntake : {
     type: Number,
     default: 8,
+  },
+  choiceFillingHours: {
+    type : Number,
+    default: 24,
+  },
+  proffSelectionHours: {
+    type: Number,
+    default: 24,
+  },
+  startAllocationTime : {
+    type: Number,
+    default: null, 
   }
 });
 

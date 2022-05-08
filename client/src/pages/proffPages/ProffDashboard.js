@@ -1,6 +1,6 @@
 import "./ProffDashboard.css";
 import { useState, useContext, useEffect } from "react";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../context/UserContext";
 import axios from "axios";
 import LeftStudentRequests from "../../components/proffs/LeftStudentRequestsCard";
 import TempSavedStudents from "../../components/proffs/TempSavedStudentsCard";

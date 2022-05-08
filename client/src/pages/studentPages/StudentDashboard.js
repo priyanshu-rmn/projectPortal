@@ -3,7 +3,7 @@ import AppliedProffCard from "../../components/students/AppliedProffCard";
 import AppliedProffCardLocked from "../../components/students/AppliedProffCardLocked ";
 import "./StudentDashboard.css";
 import { useState, useContext, useEffect } from "react";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../context/UserContext";
 import axios from "axios";
 
 function StudentDashboard() {

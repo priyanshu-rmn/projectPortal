@@ -24,7 +24,7 @@ router.get(
 //After selection of a google account in Consent Screen
 router.route("/google/callback").get(
   passport.authenticate("google", {
-    failureRedirect: "http://localhost:8000/login",
+    failureRedirect: "http://localhost:3000/login",
     // req.session.messages
     failureMessage: "Couldn't Sign In :( Try Again :)",
   }),
@@ -33,6 +33,8 @@ router.route("/google/callback").get(
     //if email of student or proff is present in  models then redirect to student-rollNo or proff-id dashboard
     console.log("/callback:  ",req.user);
     if (req.user.email === "priyanshurmn1702@gmail.com") {
+      const defaultData = new db.Admin();
+      await defaultData.save();
       res.redirect(`http://localhost:3000/a/dashboard`);
     }
     else if (isStudent(req.user.email)) {
