@@ -7,7 +7,9 @@ const session = require("express-session"); // for storing logged in user info
 const mongoose = require("mongoose"); //mongoose for mongo db
 const cors = require("cors");
 const port = 8000;
+// const utils = require("./utils")
 //MIDDLEWARES
+// app.use(utils.updateProcessStage);
 
 //for parsing different requests types
 app.use(express.json());
@@ -46,6 +48,8 @@ connectDB()
     console.log("Error", e);
   });
 
+
+
 //routes
 const basicRoutes = require("./routes/basicRoutes");
 const sRoutes = require("./routes/sRoutes");
@@ -53,11 +57,7 @@ const pRoutes = require("./routes/pRoutes");
 const aRoutes = require("./routes/aRoutes");
 const authRoutes = require("./routes/authRoutes");
 // const db = require("./models/db");
-app.get("/", (req, res) => {
-  res.send(
-    "<h1>HOME</h1><ul> ROUTES ARE : <li>/login</li> <li>/profile-reg</li> <li>/s/:roll-number/dashboard/</li> <li>/s/:roll-number/profile/</li> <li>/p/:proff-id/dashboard </li> <li>/p/:proff-id/selected-students</li> <li>/a/dashboard  </li> <li>/a/faculties</li></ul>"
-  );
-});
+
 app.use("/", basicRoutes);
 app.use("/s", sRoutes); // use the sRoutes.js file to handle endpoints starting with /s
 app.use("/p", pRoutes);

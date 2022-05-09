@@ -1,22 +1,11 @@
 import AdminDashboardForm from "../../components/admin/AdminDashboardForm";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AdminContext } from "../../context/AdminContext";
 
 export default function AdminDashboard() {
-  const [adminData, setAdminData] = useState({});
-  const [isLoading, setsILoading] = useState(true);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8000/a/dashboard`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        console.log(res);
-        setAdminData(res.data);
-        setsILoading(false);
-      });
-  }, []);
+  const adminObject = useContext(AdminContext);
+  console.log("adminObject", adminObject);
 
   function updateAdminHandler(newAdminData) {
     console.log("going", newAdminData);
@@ -26,8 +15,9 @@ export default function AdminDashboard() {
       withCredentials: true,
       data: { ...newAdminData },
     }).then((res) => {
+      console.log("response updateadminhandler");
       console.log(res);
-      setAdminData(newAdminData);
+      adminObject.setAdminObject(res.data);
     });
   }
 
@@ -40,25 +30,63 @@ export default function AdminDashboard() {
       data: {},
     }).then((res) => {
       console.log(res);
+      adminObject.setAdminObject(res.data);
     });
   }
 
+  // function randomAllocationHandler() {
+  //   axios({
+  //     method: "post",
+  //     url: `http://localhost:8000/a/randomAllocation`,
+  //     withCredentials: true,
+  //     data: {},
+  //   }).then((res) => {
+  //     console.log(res);
+  //   });
+
+  // window.location.reload();
+  // }
+
+  function resetProcessHandler() {
+    console.log("REsetting process client");
+    axios({
+      method: "post",
+      url: `http://localhost:8000/a/resetProcess`,
+      withCredentials: true,
+      data: {},
+    }).then((res) => {
+      console.log(res, "DONE");
+    });
+  }
   return (
     <>
-      {!isLoading ? (
-        <>
-          <h2 style={{ textAlign: "center" }}>Welcome ADMIN</h2>
-          <AdminDashboardForm
-            adminData={adminData}
-            onUpdateAdminDetails={updateAdminHandler}
-          />
-          <button onClick={startProcessHandler} className="btn btn-success" >
-            Start Process
-          </button>
-        </>
-      ) : (
-        <>Loading...</>
-      )}
+      <h2 style={{ textAlign: "center" }}>Welcome ADMIN</h2>
+      <AdminDashboardForm
+        adminData={adminObject}
+        onUpdateAdminDetails={updateAdminHandler}
+      />
+      {console.log("checking")}
+      <button
+        onClick={startProcessHandler}
+        className="btn btn-success"
+        disabled={adminObject.processStage !== 0}
+      >
+        Start Process
+      </button>
+      {/* <button
+        onClick={randomAllocationHandler}
+        className="btn btn-success"
+        disabled={adminObject.processStage <=2}
+      >
+        Random Allocator
+      </button> */}
+      <button
+        onClick={resetProcessHandler}
+        className="btn btn-success"
+        disabled={adminObject.processStage !== 0}
+      >
+        RESET
+      </button>
     </>
   );
 }

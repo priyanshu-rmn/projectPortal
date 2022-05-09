@@ -4,6 +4,8 @@ import AppliedProffCardLocked from "../../components/students/AppliedProffCardLo
 import "./StudentDashboard.css";
 import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
+import { AdminContext } from "../../context/AdminContext";
+import Timer from "../../components/layout/Timer";
 import axios from "axios";
 
 function StudentDashboard() {
@@ -14,8 +16,16 @@ function StudentDashboard() {
   });
   let proff1 = state.availableProffs;
   let proff2 = state.appliedProffs;
+  let studentData = {} ;
 
   const userObject = useContext(UserContext);
+  const adminObject = useContext(AdminContext);
+  const processStage = adminObject.processStage;
+  const expiryTimestamp = new Date(
+    adminObject.startAllocationTime +
+      adminObject.choiceFillingHours * 60 * 60 * 1000
+  );
+  console.log(expiryTimestamp);
 
   useEffect(() => {
     console.log(userObject);
@@ -28,7 +38,8 @@ function StudentDashboard() {
         console.log(res.data);
         proff1 = res.data.availableProffs;
         proff2 = res.data.appliedProffs;
-        setIsLocked(res.data.studentData.isLocked);
+        studentData = res.data.studentData;
+        if (processStage === 1) setIsLocked(res.data.studentData.isLocked);
         updateState({ availableProffs: proff1, appliedProffs: proff2 });
       });
   }, [userObject]);
@@ -106,53 +117,91 @@ function StudentDashboard() {
     });
     setIsLocked(true);
   }
+
+  function expireHandler() {
+    console.log("exp");
+    axios({
+      method: "post",
+      url: `http://localhost:8000/a/updateProcessStage`,
+      data: { ps: 2 },
+      withCredentials: true,
+    }).then((res) => {
+      console.log(res);
+      adminObject.setAdminObject(res.data);
+    });
+    window.location.reload();
+  }
+
   let j = 1;
-  return (
-    <>
-      <div>
-        <div className="card-groupp">
-          {isLocked && (
-            <div>
-              <h4>Final Applied Proffs</h4>
-              {proff2.map((p2) => (
-                <AppliedProffCardLocked
-                  key={p2._id}
-                  proffData={p2}
-                  slNo={j++}
-                />
-              ))}
-            </div>
-          )}
+  if (processStage === 1 || processStage === 2) {
+    return (
+      <>
+        {processStage === 1 && (
+          <Timer
+            expiryTimestamp={expiryTimestamp}
+            onTimerExpire={expireHandler}
+          />
+        )}
+        {/* <button onClick={expireHandler}>Expire Handler</button> */}
+        <div>
+          {processStage === 2 && <> SELECTION ONGOING...</>}
+          <div className="card-groupp">
+            {isLocked && (
+              <div>
+                <h4>Final Applied Proffs</h4>
+                {proff2.map((p2) => (
+                  <AppliedProffCardLocked
+                    key={p2._id}
+                    proffData={p2}
+                    slNo={j++}
+                  />
+                ))}
+              </div>
+            )}
+            {!isLocked && (
+              <>
+                <div className="card out">
+                  <h4>Available Proffs</h4>
+                  {AvailableProffListJSX}
+                </div>
+                <div className="card out">
+                  <h4>Applied Proffs</h4>
+                  {AppliedProffListJSX}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+        <div className="bbutton">
           {!isLocked && (
             <>
-              <div className="card out">
-                <h4>Available Proffs</h4>
-                {AvailableProffListJSX}
+              <div>
+                <button
+                  onClick={saveAppliedProffHandler}
+                  class="btn btn-success"
+                >
+                  SAVE
+                </button>
               </div>
-              <div className="card out">
-                <h4>Applied Proffs</h4>
-                {AppliedProffListJSX}
+
+              <div>
+                <button
+                  onClick={lockAppliedProffHandler}
+                  class="btn btn-danger"
+                >
+                  LOCK
+                </button>
               </div>
             </>
           )}
         </div>
-      </div>
-      <div className="bbutton">
-      {!isLocked && (
-        <>
-
-          <div >
-            <button onClick={saveAppliedProffHandler }  class="btn btn-success"  >SAVE</button>
-          </div>
-
-          <div >
-            <button onClick={lockAppliedProffHandler} class="btn btn-danger">LOCK</button>
-          </div>
-        </>
-      )}
-      </div>
-    </>
-  );
+      </>
+    );
+  } else if (processStage === 0) {
+    return <>PROCESS NOT STARTED</>;
+  } else {
+    return <>Congratulations... Selected Proff : {}</>;
+  }
 }
 
 export default StudentDashboard;

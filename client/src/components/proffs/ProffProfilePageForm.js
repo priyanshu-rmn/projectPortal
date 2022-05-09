@@ -1,9 +1,11 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AdminContext } from "../../context/AdminContext";
 
 function ProffProfilePageForm(props) {
   const [rd, setRedirect] = useState(false);
   const navigate = useNavigate();
+  const adminObject = useContext(AdminContext);
 
   console.log(props.user);
 
@@ -101,17 +103,19 @@ function ProffProfilePageForm(props) {
             <div className="input-group flex-nowrap">
               <div className="input-group-prepend">
                 <span className="input-group-text" id="addon-wrapping">
-                  Total Proffs Intake{" "}
+                  Total Students Intake{" "}
                 </span>
               </div>
               <input
                 className="form-control"
-                type="text"
+                type="number"
                 name="total"
                 id="total"
+                max={adminObject.maxStudentIntake}
+                min = "0"
                 required
                 defaultValue={props.user.total}
-
+                disabled = {adminObject.processStage!==0}
                 ref={totalInputRef}
               />
             </div>

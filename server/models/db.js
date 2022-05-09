@@ -85,6 +85,10 @@ const adminSchema = mongoose.Schema({
   startAllocationTime : {
     type: Number,
     default: null, 
+  },
+  processStage: {
+    type: Number,
+    default: 0, 
   }
 });
 

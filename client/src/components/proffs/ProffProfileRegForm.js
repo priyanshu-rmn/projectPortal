@@ -1,11 +1,13 @@
-import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AdminContext } from "../../context/AdminContext";
 
 function ProffProfileRegForm(props) {
   const [rd, setRedirect] = useState(false);
   const navigate = useNavigate();
 
+  const adminObject = useContext(AdminContext);
+  
   console.log(props.user);
 
   const fNameInputRef = useRef();
@@ -111,10 +113,14 @@ function ProffProfileRegForm(props) {
               </div>
               <input
                 className="form-control"
-                type="text"
+                type="number"
                 name="total"
                 id="total"
+                max={adminObject.maxStudentIntake}
+                min = "0"
                 required
+                defaultValue={adminObject.maxStudentIntake}
+                disabled = {adminObject.processStage!==0}
                 ref={totalInputRef}
               />
             </div>

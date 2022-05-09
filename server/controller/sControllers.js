@@ -23,22 +23,27 @@ async function getStudentDetails(id) {
 
 
 const GETdashboard = async (req, res) => {
-    const { id } = req.params;
-    console.log("/dashboard : ", req.user);
-    const allProffs = await getProffList();//[{id=fgh,dsfkjhkdfsh}, {id= dskjfjh, kjsdfhsdf}]
-    const studentData = await getStudentDetails(id);
-    const appliedProffsIds = studentData.proffOrder;//[sdfjkdsj,sdkjhkdfh,sdfiuhdfh]
-    const appliedProffs = []
-    for (let pId of appliedProffsIds) {
-        for (let p of allProffs) {
-            if (p.id === pId) {
-                appliedProffs.push(p);
-            }
-        }       
+    try {
+        const { id } = req.params;
+        console.log("/dashboard : ", req.user);
+        const allProffs = await getProffList();//[{id=fgh,dsfkjhkdfsh}, {id= dskjfjh, kjsdfhsdf}]
+        const studentData = await getStudentDetails(id);
+        const appliedProffsIds = studentData.proffOrder;//[sdfjkdsj,sdkjhkdfh,sdfiuhdfh]
+        const appliedProffs = []
+        for (let pId of appliedProffsIds) {
+            for (let p of allProffs) {
+                if (p.id === pId) {
+                    appliedProffs.push(p);
+                }
+            }       
+        }
+        const availableProffs = allProffs.filter(p => !appliedProffsIds.includes(p.id));
+        console.log("studentData", studentData);
+        res.status(200).json({availableProffs,appliedProffs,studentData});
     }
-    const availableProffs = allProffs.filter(p => !appliedProffsIds.includes(p.id));
-    console.log("studentData", studentData);
-    res.status(200).json({availableProffs,appliedProffs,studentData});
+    catch (e) {
+        console.log("ERROR", e.messgage);
+    }
 }
 
 const POSTdashboard = async (req, res) => {

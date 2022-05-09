@@ -1,4 +1,5 @@
 import { useReducer, useState,useContext } from "react";
+import Timer from "../components/layout/Timer";
 import { AdminContext } from "./AdminContext";
 
 const ACTIONS = {
@@ -51,6 +52,7 @@ export default function UseReducerLearn() {
   console.log(todos);
   return (
     <>
+      {/* <Timer/> */}
       <form onSubmit={submitHandler}>
         <input
           type="text"

@@ -33,8 +33,12 @@ router.route("/google/callback").get(
     //if email of student or proff is present in  models then redirect to student-rollNo or proff-id dashboard
     console.log("/callback:  ",req.user);
     if (req.user.email === "priyanshurmn1702@gmail.com") {
-      const defaultData = new db.Admin();
-      await defaultData.save();
+      const docNo = await db.Admin.estimatedDocumentCount();
+      if (docNo === 0) {
+        console.log(docNo);
+        const defaultData = new db.Admin();
+        await defaultData.save();
+      }
       res.redirect(`http://localhost:3000/a/dashboard`);
     }
     else if (isStudent(req.user.email)) {

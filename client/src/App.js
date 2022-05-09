@@ -22,9 +22,11 @@ import UpperNavbar from "./components/layout/UpperNavbar";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./context/UserContext";
 import UseReducerLearn from "./context/UseReducerLearn";
+import { AdminContext } from "./context/AdminContext";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const userObject = useContext(UserContext);
   console.log(userObject, isLoggedIn);
   useEffect(() => {
@@ -33,52 +35,48 @@ function App() {
     }
   }, [userObject]);
 
+  const adminObject = useContext(AdminContext);
+  const processStage = adminObject.processStage;
+
   return (
     <>
-      <Header isLoggedIn={isLoggedIn} setIsLoggedIn = {setIsLoggedIn} />
-
+      <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       {isLoggedIn && <UpperNavbar />}
-      
-      <Routes>
+
+      <Routes>                                                                                                                                                                                                                                                                                                                                                                                                                          
         <Route exact path="/" element={<UseReducerLearn />} />
-        <Route exact path="/login" element={<LoginPage />} />
+        {<Route exact path="/login" element={<LoginPage />} />}
 
         {isLoggedIn && (
-          <Route exact path="/s/dashboard" element={<StudentDashboard />} />
+          <>
+            <Route path="/s/">
+              <Route exact path="dashboard" element={<StudentDashboard />} />
+              <Route exact path="profile" element={<StudentProfilePage />} />
+              <Route exact path="profileReg" element={<StudentProfileReg />} />
+            </Route>
+            <Route path="/p/">
+              <Route exact path="dashboard" element={<ProffDashboard />} />
+              <Route exact path="profileReg" element={<ProffProfileReg />} />
+              <Route exact path="profile" element={<ProffProfilePage />} />
+              <Route
+                exact
+                path="selectedStudents"
+                element={<ProffSelectedStudentsPage />}
+              />
+            </Route>
+            )
+            <Route path="/a/">
+              <Route exact path="dashboard" element={<AdminDashboard />} />
+              <Route exact path="faculties" element={<FacultyPage />} />
+            </Route>
+          </>
         )}
-        {isLoggedIn && (
-          <Route exact path="/s/profile" element={<StudentProfilePage />} />
-        )}
-        {isLoggedIn && (
-          <Route exact path="/s/profileReg" element={<StudentProfileReg />} />
-        )}
-        {isLoggedIn && (
-          <Route exact path="/p/dashboard" element={<ProffDashboard />} />
-        )}
-        {isLoggedIn && (
-          <Route exact path="/p/profileReg" element={<ProffProfileReg />} />
-        )}
-        {isLoggedIn && (
-          <Route exact path="/p/profile" element={<ProffProfilePage />} />
-        )}
-        {isLoggedIn && (
-          <Route
-            exact
-            path="/p/selectedStudents"
-            element={<ProffSelectedStudentsPage />}
-          />
-        )}
-        {isLoggedIn && (
-          <Route exact path="/a/dashboard" element={<AdminDashboard />} />
-        )}
-        {isLoggedIn && (
-          <Route exact path="/a/faculties" element={<FacultyPage />} />
-        )}
+
         <Route
           path="*"
           element={
             <>
-              <div>404 PAGE NOT FOUND</div>
+              <div>404 PAGE NOT FOUND OR NOT LOGGED IN </div>
               <Link to="/login">Login</Link>
             </>
           }
