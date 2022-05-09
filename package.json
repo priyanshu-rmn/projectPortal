@@ -1,0 +1,25 @@
+{
+  "name": "projectportal",
+  "version": "1.0.0",
+  "description": "PROJECT PORTAL FOR EXPLORATORY PROJECT using MERN stack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"cd backend-server && npm run dev\" \"cd frontend-client && npm start\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cryptic-pr03/projectPortal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cryptic-pr03/projectPortal/issues"
+  },
+  "homepage": "https://github.com/cryptic-pr03/projectPortal#readme",
+  "dependencies": {
+    "concurrently": "^7.0.0",
+    "query-string": "^7.1.1"
+  }
+}
